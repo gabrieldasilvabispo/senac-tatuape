@@ -1,0 +1,5 @@
+PWM - alimentar fans(ventoinhas)
+DEBUG LED - sinalizar os erros
+VRM - para filtrar energia 
+RGB 12V 4 pinos
+ARGB 5V 3 pinos	
