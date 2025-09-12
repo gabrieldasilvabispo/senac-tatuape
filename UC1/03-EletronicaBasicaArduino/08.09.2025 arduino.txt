@@ -1,0 +1,10 @@
+GND - Negativo 
+Arduino é linguagem C
+começa com /** e fecha com */ - documentação de cabeçalho 
+// comentário em linha
+linguagem C termina a linha sempre com ;
+pinMode - configurar o pino 13 como saida
+digitalWrite - acender o LED(HIGH= SV ou 1 binário )
+LOW - desliga
+HIGH - liga
+delay - esperar 1000(1 segundo)
