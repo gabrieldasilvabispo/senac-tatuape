@@ -1,0 +1,5 @@
+TN - alta velocidade 
+VA - cores mais lavadas
+IPS - cores mais vivas
+OLED - top de linha usado para movimento
+Resolução - quantidade de pixels
