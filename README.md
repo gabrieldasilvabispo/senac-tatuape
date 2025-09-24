@@ -1,3 +1,5 @@
+![GitHub License](https://img.shields.io/github/license/gabrieldasilvabispo/senac-tatuape?style=for-the-badge)
+
 # 📘 Repositório de Estudos – Técnico em Informática (SENAC Tatuapé)
 
 Este repositório reúne todo o conteúdo, atividades, anotações e projetos desenvolvidos durante o curso **Técnico em Informática do SENAC Tatuapé**.  
