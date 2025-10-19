@@ -6,22 +6,19 @@ Este repositório reúne todo o conteúdo, atividades, anotações e projetos de
 O objetivo é documentar o aprendizado de forma clara e organizada, facilitando a consulta de procedimentos, exercícios e projetos práticos.
 
 ---
+Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 
-## 📚 Unidades Curriculares (UC)
+### 🧩 **UC-1: Fundamentos de Hardware, Elétrica, Eletrônica e Ferramentas**
+- ⚙️ **Teoria de Hardware** – 🟡 *em andamento*  
+- 🔌 **Fundamentos de Elétrica** – ✅ *concluído*  
+- 🤖 **Eletrônica Básica com Arduino** – ✅ *concluído*  
+- 🧠 **Introdução à Inteligência Artificial (IA)** – ✅ *concluído*  
+- 🌐 **Git e GitHub** – ✅ *concluído*  
+- 🧵 **Cabeamento de Redes** – 🟡 *em andamento*  
 
-### ✅ UC-1: Fundamentos de Hardware, Elétrica, Eletrônica e Ferramentas
-- Teoria de Hardware  
-- Elétrica Básica(concluído)
-- Eletrônica Básica com **Arduino**(concluído)
-- Introdução ao **Git** e **GitHub**(concluído)  
-- Fundamentos de **Inteligência Artificial (IA/AI)**(concluído)
-- Cabeamento de Redes
-
-### 🚀 UC-2: Sistemas Operacionais
-- **Microsoft Windows** (Administração e Configuração)  
-- **GNU/Linux (Open Source)** (Instalação, Comandos Básicos e Gerenciamento)  
-
----
+### 💻 **UC-2: Sistemas Operacionais**
+- 🪟 **Microsoft Windows** – 🟡 *início*  
+- 🐧 **GNU/Linux (Open Source)** – 🟡 *início*  
 
 ## 🛠️ Atualizações
 Este arquivo será atualizado gradativamente conforme novas **Unidades Curriculares (UCs)** forem estudadas, documentando conteúdos, projetos e práticas relacionadas ao curso.
