@@ -11,10 +11,11 @@ O objetivo é documentar o aprendizado de forma clara e organizada, facilitando 
 
 ### ✅ UC-1: Fundamentos de Hardware, Elétrica, Eletrônica e Ferramentas
 - Teoria de Hardware  
-- Elétrica Básica  
-- Eletrônica Básica com **Arduino**  
-- Introdução ao **Git** e **GitHub**  
-- Fundamentos de **Inteligência Artificial (IA/AI)**  
+- Elétrica Básica(concluído)
+- Eletrônica Básica com **Arduino**(concluído)
+- Introdução ao **Git** e **GitHub**(concluído)  
+- Fundamentos de **Inteligência Artificial (IA/AI)**(concluído)
+- Cabeamento de Redes
 
 ### 🚀 UC-2: Sistemas Operacionais
 - **Microsoft Windows** (Administração e Configuração)  
