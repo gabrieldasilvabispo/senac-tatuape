@@ -14,13 +14,15 @@ Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 - 🤖 **Eletrônica Básica com Arduino** – ✅ *concluído*  
 - 🧠 **Introdução à Inteligência Artificial (IA)** – ✅ *concluído*  
 - 🌐 **Git e GitHub** – ✅ *concluído*  
-- 🧵 **Cabeamento de Redes** – ✅ *concluído*
+
 
 ### 💻 **UC-2: Sistemas Operacionais**
 - 🪟 **Microsoft Windows** – 🟡 *início*  
 - 🐧 **GNU/Linux (Open Source)** – 🟡 *início*  
 
 ### 💡 **UC-3:
+- 🧵 **Cabeamento de Redes** – ✅ *concluído*
+
 
 
 ## 🛠️ Atualizações
