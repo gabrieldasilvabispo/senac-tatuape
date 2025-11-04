@@ -9,16 +9,19 @@ O objetivo é documentar o aprendizado de forma clara e organizada, facilitando 
 Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 
 ### 🧩 **UC-1: Fundamentos de Hardware, Elétrica, Eletrônica e Ferramentas**
-- ⚙️ **Teoria de Hardware** – 🟡 *em andamento*  
+- ⚙️ **Teoria de Hardware** – ✅ *concluído*
 - 🔌 **Fundamentos de Elétrica** – ✅ *concluído*  
 - 🤖 **Eletrônica Básica com Arduino** – ✅ *concluído*  
 - 🧠 **Introdução à Inteligência Artificial (IA)** – ✅ *concluído*  
 - 🌐 **Git e GitHub** – ✅ *concluído*  
-- 🧵 **Cabeamento de Redes** – 🟡 *em andamento*  
+- 🧵 **Cabeamento de Redes** – ✅ *concluído*
 
 ### 💻 **UC-2: Sistemas Operacionais**
 - 🪟 **Microsoft Windows** – 🟡 *início*  
 - 🐧 **GNU/Linux (Open Source)** – 🟡 *início*  
+
+### 💡 **UC-3:
+
 
 ## 🛠️ Atualizações
 Este arquivo será atualizado gradativamente conforme novas **Unidades Curriculares (UCs)** forem estudadas, documentando conteúdos, projetos e práticas relacionadas ao curso.
