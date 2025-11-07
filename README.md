@@ -17,8 +17,8 @@ Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 
 
 ### 💻 **UC-2: Sistemas Operacionais**
-- 🪟 **Microsoft Windows** – 🟡 *início*  
-- 🐧 **GNU/Linux (Open Source)** – 🟡 *início*  
+- 🪟 **Microsoft Windows** – 🟡 *em andamento*  
+- 🐧 **GNU/Linux (Open Source)** – 🟡 *em andamento*  
 
 ### 💡 **UC-3:
 - 🧵 **Cabeamento de Redes** – ✅ *concluído*
