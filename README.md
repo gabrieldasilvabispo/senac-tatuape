@@ -15,14 +15,14 @@ Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 - 🧠 **Introdução à Inteligência Artificial (IA)** – ✅ *concluído*  
 - 🌐 **Git e GitHub** – ✅ *concluído*  
 
-
 ### 💻 **UC-2: Sistemas Operacionais**
-- 🪟 **Microsoft Windows** – 🟡 *em andamento*  
-- 🐧 **GNU/Linux (Open Source)** – 🟡 *em andamento*  
+- 🪟 **Microsoft Windows** – 🟡 *em andamento*   
 
 ### 💡 **UC-3:
 - 🧵 **Cabeamento de Redes** – ✅ *concluído*
 
+### 🐧 **UC-4: Sistemas Operacionais GNU/Linux (Open Source)**
+- 🐧 **GNU/Linux (Open Source)** – 🟡 *em andamento*  
 
 
 ## 🛠️ Atualizações
