@@ -30,6 +30,9 @@ Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 ###                  UC-5: 
 - Redes - 🟡 em andamento
 
+###                  UC-6:
+- Linux Server - 🟡 em andamento
+
 ## 🛠️ Atualizações
 Este arquivo será atualizado gradativamente conforme novas **Unidades Curriculares (UCs)** forem estudadas, documentando conteúdos, projetos e práticas relacionadas ao curso.
 
