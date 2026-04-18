@@ -8,30 +8,20 @@ O objetivo é documentar o aprendizado de forma clara e organizada, facilitando 
 ---
 Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 
-###                  UC-1:
+
 - Teoria de Hardware – ✅ *concluído*
 - Fundamentos de Elétrica – ✅ *concluído*  
 - Eletrônica Básica com Arduino – ✅ *concluído*  
 - Introdução à Inteligência Artificial (IA) – ✅ *concluído*  
 - Git e GitHub – ✅ *concluído*  
-
-###                  UC-2: 
 -  Microsoft Windows – ✅ *concluído*
 -  Linux - ✅ *concluído*
-
-###                  UC-3:
 - Cabeamento de Redes – ✅ *concluído*
 - - Manutencção de computadores - ✅ *concluído*
-  
-
-###                  UC-4:
 - GNU/Linux (Open Source) – ✅ *concluído*  
-
-###                  UC-5: 
 - Redes - 🟡 em andamento
-
-###                  UC-6:
 - Linux Server - 🟡 em andamento
+- Windows Server - 🟡 em andamento
 
 ## 🛠️ Atualizações
 Este arquivo será atualizado gradativamente conforme novas **Unidades Curriculares (UCs)** forem estudadas, documentando conteúdos, projetos e práticas relacionadas ao curso.
