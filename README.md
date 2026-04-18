@@ -14,10 +14,10 @@ Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 - Eletrônica Básica com Arduino – ✅ *concluído*  
 - Introdução à Inteligência Artificial (IA) – ✅ *concluído*  
 - Git e GitHub – ✅ *concluído*  
--  Microsoft Windows – ✅ *concluído*
--  Linux - ✅ *concluído*
+- Microsoft Windows – ✅ *concluído*
+- Linux - ✅ *concluído*
 - Cabeamento de Redes – ✅ *concluído*
-- - Manutencção de computadores - ✅ *concluído*
+- Manutencção de computadores - ✅ *concluído*
 - GNU/Linux (Open Source) – ✅ *concluído*  
 - Redes - 🟡 em andamento
 - Linux Server - 🟡 em andamento
