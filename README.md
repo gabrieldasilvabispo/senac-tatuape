@@ -19,9 +19,9 @@ Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 - Cabeamento de Redes – ✅ *concluído*
 - Manutencção de computadores - ✅ *concluído*
 - GNU/Linux (Open Source) – ✅ *concluído*  
-- Redes - 🟡 em andamento
-- Linux Server - 🟡 em andamento
-- Windows Server - 🟡 em andamento
+- Redes - ✅ *concluído* 
+- Linux Server - ✅ *concluído* 
+- Windows Server - ✅ *concluído* 
 
 ## 🛠️ Atualizações
 Este arquivo será atualizado gradativamente conforme novas **Unidades Curriculares (UCs)** forem estudadas, documentando conteúdos, projetos e práticas relacionadas ao curso.
