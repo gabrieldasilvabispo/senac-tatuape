@@ -22,7 +22,8 @@ Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
 - Redes - ✅ *concluído* 
 - Linux Server - ✅ *concluído* 
 - Windows Server - ✅ *concluído* 
-
+- Logica de Programação - Em Andamento
+- Photoshop - Em Andamento
 ## 🛠️ Atualizações
 Este arquivo será atualizado gradativamente conforme novas **Unidades Curriculares (UCs)** forem estudadas, documentando conteúdos, projetos e práticas relacionadas ao curso.
 
