@@ -15,7 +15,7 @@ Conteúdo, atividades e anotações do curso técnico, organizados por Unidade C
 |---|---|---|
 | Teoria de Hardware | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Teoria-de-hardware) |
 | Fundamentos de Elétrica | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/El%C3%A9trica-e-eletr%C3%B4nica--B%C3%A1sica--Arduino) |
-| Eletrônica Básica (Arduino) | ✅ Concluído || [[link] ](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Arduino)|
+| Eletrônica Básica (Arduino) | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Arduino) |
 | Introdução à IA | ✅ Concluído |
 | Git e GitHub | ✅ Concluído |
 | Microsoft Windows | ✅ Concluído |
