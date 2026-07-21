@@ -1,39 +1,47 @@
 ![GitHub License](https://img.shields.io/github/license/gabrieldasilvabispo/senac-tatuape?style=for-the-badge)
 
+
+
+
 # 📘 Repositório de Estudos – Técnico em Informática (SENAC Tatuapé)
-
-Este repositório reúne todo o conteúdo, atividades, anotações e projetos desenvolvidos durante o curso **Técnico em Informática do SENAC Tatuapé**.  
-O objetivo é documentar o aprendizado de forma clara e organizada, facilitando a consulta de procedimentos, exercícios e projetos práticos.
-
+ 
+Conteúdo, atividades e anotações do curso técnico, organizados por Unidade Curricular (UC) para consulta rápida de procedimentos e exercícios.
+ 
 ---
-Atualmente, estou aprofundando meus conhecimentos nas seguintes áreas:
-
-
-- Teoria de Hardware – ✅ *concluído*
-- Fundamentos de Elétrica – ✅ *concluído*  
-- Eletrônica Básica com Arduino – ✅ *concluído*  
-- Introdução à Inteligência Artificial (IA) – ✅ *concluído*  
-- Git e GitHub – ✅ *concluído*  
-- Microsoft Windows – ✅ *concluído*
-- Linux - ✅ *concluído*
-- Cabeamento de Redes – ✅ *concluído*
-- Manutencção de computadores - ✅ *concluído*
-- GNU/Linux (Open Source) – ✅ *concluído*  
-- Redes - ✅ *concluído* 
-- Linux Server - ✅ *concluído* 
-- Windows Server - ✅ *concluído* 
-- Logica de Programação - Em Andamento
-- Photoshop - Em Andamento
+ 
+## 📑 Unidades Curriculares
+ 
+| UC | Status | Wiki |
+|---|---|---|
+| Teoria de Hardware | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Teoria-de-hardware) |
+| Fundamentos de Elétrica | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/El%C3%A9trica-e-eletr%C3%B4nica--B%C3%A1sica--Arduino) |
+| Eletrônica Básica (Arduino) | ✅ Concluído || [[link] ](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Arduino)|
+| Introdução à IA | ✅ Concluído |
+| Git e GitHub | ✅ Concluído |
+| Microsoft Windows | ✅ Concluído |
+| Linux / GNU-Linux | ✅ Concluído |[ [link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Linux) |
+| Manutenção de Computadores | ✅ Concluído |
+| Cabeamento de Redes | ✅ Concluído | [[link] ](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Cabeamento-de-Rede)|
+| Redes | ✅ Concluído |[ [link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Redes) |
+| Linux Server | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Linux-Server) |
+| Windows Server | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Windows-Server) |
+| Lógica de Programação | 🔄 Em andamento | [[link] ](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/L%C3%B3gica-de-Programa%C3%A7%C3%A3o)|
+| Photoshop | 🔄 Em andamento |[ [link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Photoshop) |
+ 
+---
+ 
 ## 🛠️ Atualizações
-Este arquivo será atualizado gradativamente conforme novas **Unidades Curriculares (UCs)** forem estudadas, documentando conteúdos, projetos e práticas relacionadas ao curso.
-
+ 
+Repositório atualizado gradativamente conforme novas UCs são cursadas.
+ 
 ---
-
+ 
 ## 🎯 Objetivo
-- Centralizar materiais de estudo  
-- Documentar passo a passo das aulas  
-- Facilitar a revisão e compartilhamento do conhecimento  
-
+ 
+- Centralizar materiais de estudo
+- Documentar procedimentos e configurações passo a passo
+- Servir de referência para revisão e consulta futura
 ---
-
-✍️ Desenvolvido durante o **Curso Técnico em Informática – SENAC Tatuapé**  
+ 
+**Curso Técnico em Informática – SENAC Tatuapé**
+ 
