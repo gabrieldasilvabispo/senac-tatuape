@@ -1,1 +1,1 @@
-diretório da UC-1  
+diretório das UCS  
