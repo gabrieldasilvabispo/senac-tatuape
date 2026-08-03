@@ -26,7 +26,7 @@ Conteúdo, atividades e anotações do curso técnico, organizados por Unidade C
 | Linux Server | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Linux-Server) |
 | Windows Server | ✅ Concluído | [[link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Windows-Server) |
 | Lógica de Programação | 🔄 Em andamento | [[link] ](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/L%C3%B3gica-de-Programa%C3%A7%C3%A3o)|
-| Photoshop | 🔄 Em andamento |[ [link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Photoshop) |
+| Photoshop | ✅ Concluído|[ [link]](https://github.com/gabrieldasilvabispo/senac-tatuape/wiki/Photoshop) |
  
 ---
  
