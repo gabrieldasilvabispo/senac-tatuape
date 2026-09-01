@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tipo de dados</title>
+</head>
+<body>
+	<h1>Tipo de dados</h1>
+	<p id="teste1">O valor de a é: </p>
+	<p id="teste2">O valor de b é: </p>
+	<p id="teste3">O valor de c é: </p>
+	<p id="teste4">O valor de d é: </p>
+	<p id="teste5">O valor de e é: </p>
+	<p id="teste6">O valor de f é: </p>
+	<p id="teste7">O valor de g é: </p>
+
+	<script>
+	// Definindo as variaveis
+		var a; // variavel a sem nenhuma definição do tipo de valor
+		var b = 1; // variavel b do tipo inteiro com valor 1
+		var c =[1,2,3,4,5]; // variavel do tipo array com valores 1,2,3,4,5
+		var d =['Verde','Amarelo','Azul','Branco']; // variavel do tipo array
+		var e = 'JavaScript'; // variavel dom tipo String ou texto
+		var f = false; //variavel do tipo booleana - variavel logica
+		var g = null; // variavel sem definição, com valor nulo
+
+		// Exibindo o conteudo de cada variavel
+		document.getElementById('teste1').innerHTML+=a;
+		document.getElementById('teste2').innerHTML+=b;
+		document.getElementById('teste3').innerHTML+=c[2];
+		document.getElementById('teste4').innerHTML+=d;
+		document.getElementById('teste5').innerHTML+=e;
+		document.getElementById('teste6').innerHTML+=f;
+		document.getElementById('teste7').innerHTML+=g;
+	</script>
+</body>
+</html>
