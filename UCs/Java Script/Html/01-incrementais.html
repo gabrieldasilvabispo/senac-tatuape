@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Operadores incrementais</title>
+</head>
+<body>
+	<h1>Operadores incrementais</h1>
+	<p id="teste1">O valor de a é: </p>
+	<p id="teste2">O valor de b é: </p>
+	<p id="teste3">O valor de c é: </p>
+	<p id="teste4">O valor de d é: </p>
+
+	<script>
+		// Criação de variaveis
+		var a = 1;
+		var b = 1;	
+		var c = 1;	
+		var d = 5;
+		
+		// O incremento antes aumenta antes
+		// O incremento depois aumenta depois
+		
+		a = ++a;
+		b = b++;
+		d = --d;
+
+		for (var cont=1; cont <= 3; cont++){
+			c = c + cont;
+		}
+
+		document.getElementById('teste1').innerHTML +=a;
+		document.getElementById('teste2').innerHTML +=b;
+		document.getElementById('teste3').innerHTML +=c;
+		document.getElementById('teste4').innerHTML +=d;
+		
+	</script>
+</body>
+</html>
