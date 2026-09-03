@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Estrutura condicional escolha</title>
+</head>
+<body>
+	<h1>Estrutura condicional escolha</h1>
+	<p id="teste"></p>
+
+	<script>
+	//Criando as variveis
+	var dia = 0;
+	var resposta = '';
+
+	//Solicitando um numero para o usuario
+	dia = parseInt(prompt('Digite um número entre 1 a 7', ''));
+	/*Vai abrir uma caixa de dialogo no navegador
+	pedindo para o usuario digitar um numero 
+	entre 1 a 7
+	*/
+
+	//Criando a condicional escolha 
+	switch(dia){
+    case 1:
+		resposta = 'Domingo';
+		break;
+	case 2:
+		resposta = 'Segunda-feira';
+		break;
+    case 3: resposta = 'Terça-feira';
+	    break;
+	case 4:
+		resposta = 'Quarta-feira';
+		break;
+	case 5:	
+	    resposta = 'Quinta-feira';
+		break;
+	case 6:	
+		resposta = 'Sexta-feira';
+		break;
+	case 7: 
+		resposta = 'Sabado';
+		break;
+	default: 
+	resposta = 'Dia da semana não existe';
+	
+		} //Mostrar o resultado
+	document.getElementById('teste').innerHTML = resposta;
+	</script>
+</body>
+</html>
