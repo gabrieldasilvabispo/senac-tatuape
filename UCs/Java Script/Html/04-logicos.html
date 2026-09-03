@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Operadores lógicos</title>
+</head>
+<body>
+	<h1>Operadores lógicos</h1>
+	<h3>Lógico && (e)</h3>
+
+	<script>
+		var resposta = true && true; // usando o operador logico && = E
+		document.write(resposta + '<br>');
+
+		resposta = false && false;
+		document.write(resposta + '<br>');
+	
+		resposta = false && true;
+		document.write(resposta + '<br>');
+
+		resposta = false && (3==4);
+		document.write(resposta + '<br>');
+
+		resposta = 'Senac' && 'JavaScript';
+		document.write(resposta + '<br>');
+
+		resposta = false && 'Senac';
+		document.write(resposta + '<br>');
+
+		resposta = 'Senac' && false;
+		document.write(resposta + '<br>');
+
+		resposta = '' && false;// o usada aspas simples sem informação vale vazio
+		document.write(resposta + '<br>');
+
+		resposta = false && '';
+		document.write(resposta + '<br>');
+	</script>
+
+
+
+
+	
+
+	<h3>Lógico || (ou)</h3>
+
+	<script>
+		var resposta = true || true
+		document.write(resposta + '<br>');
+
+		resposta = false || true;
+		document.write(resposta + '<br>');
+
+		resposta = true || false;
+		document.write(resposta + '<br>');
+
+		resposta = false || (3==4);
+		document.write(resposta + '<br>');
+
+		resposta = 'Senac' || 'JavaScript';
+		document.write(resposta + '<br>');
+	</script>
+
+
+
+
+
+	<h3>Operador ! (not - não)</h3>
+
+	<script>
+		var resposta = !true;
+		document.write(resposta + '<br>');
+
+		resposta = !false;
+		document.write(resposta + '<br>');
+
+		resposta = !'Senac';
+		document.write(resposta + '<br>');
+	</script>
+
+</body>
+</html>

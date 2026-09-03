@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Operadores comparativos</title>
+</head>
+<body>
+	<h1>Operadores comparativos</h1>
+	<p id="teste1">O valor de a é: </p>
+	<p id="teste2">O valor de a é: </p>
+	<p id="teste3">O valor de a é: </p>
+	<p id="teste4">O valor de a é: </p>
+	<p id="teste5">O valor de a é: </p>
+	<p id="teste6">O valor de a é: </p>
+
+	<script>
+		// Criação das variaveis
+		var a = 1;			
+		var b = 1;
+		var c = '1';
+		var d = 2;
+		
+		// Impressão dos resultados 
+		document.getElementById('teste1').innerHTML +=a == b; //Duas vezes o sinal de ==, compara o apenas o valor e não o tipo de variável
+		document.getElementById('teste2').innerHTML +=a === c; // três vezes o sinal de ==, compara o valor e o tipo de variavel
+		document.getElementById('teste3').innerHTML +=a === b;
+		document.getElementById('teste4').innerHTML +=a >= b;
+		document.getElementById('teste5').innerHTML +=a >= d;
+		document.getElementById('teste6').innerHTML +=a <= c;
+
+	</script>
+
+</body>
+</html>
