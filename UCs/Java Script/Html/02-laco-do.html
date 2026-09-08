@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Laço de repetição DO</title>
+</head>
+<body>
+	<h1>Laço de repetição DO</h1>
+	<p id="tabuada"></p>
+
+	<script type= "text/javascript">
+	// criando as variaveis
+	var num = 5; // numero da tabuada
+	var cont = 1; // Contador do loop
+	var resposta =''; // string que vai armazena o resultado
+	
+	// Criando a tabuada
+	do {
+		resposta += num + 'x ' + cont +  ' = ' + num * cont + '<br>';
+		cont++;
+	} while (cont <= 10);
+	/* Diferança principal entre FOR e o DO WHILE
+	no FOR, é definido o inicio, condição e incremento tudo na mesma linha 
+	no DO..WHILE, o bloco de codigo sempre é executado pelo menos uma vez
+	e só depois verifica a condição (cont <=10)*/ 
+	
+	/* ou seja, o codigo dentro do DO(...) roda primeiro
+	* depois o while (cont <= 10) verifica se deve continuar repetindo*/
+
+	
+
+	// Exibir a tabuada
+	document.getElementById('tabuada').innerHTML = resposta;
+	
+	/*
+	Em resumo:
+	Tanto o codigo FOR e o codigo DO...WHILE chegam no mesmo resultado,
+	a diferença é que o DO...WHILE garante pelo menos uma execução,
+	mesmo que a condição seja falsa logo no inicio.*/
+	
+	
+	</script>
+
+</body>
+</html>

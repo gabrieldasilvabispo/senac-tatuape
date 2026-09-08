@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Laço de repetição FOR</title>
+</head>
+<body>
+	<h1>Laço de repetição FOR</h1>
+	<p id="tabuada"></p>
+
+	<script type ="text/javascript">
+	// criando as variaveis
+	var num = 5; // numero da tabuada
+	var cont = 1; // Contador do loop
+	var resposta =''; // string que vai armazena o resultado
+	
+	// Criando a tabuada
+	for(cont = 1; cont <= 10; cont ++){
+		// esse laço for repete de 1 a 10
+		resposta += num + 'x ' + cont +  ' = ' + num * cont + '<br>';
+		// em cada repetição, é calculado num * cont e adiciona a variavel respota
+		
+	// Mostrar a tabuada
+	document.getElementById('tabuada').innerHTML = resposta;
+	// Insere todo o couteudo da variavel resposta dentro do elemento HTML que tiver o id ='tabuada'
+	};
+	
+	</script>
+
+</body>
+</html>
