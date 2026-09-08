@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Variável acumuladora</title>
+</head>
+<body>
+	<h1>Variável acumuladora</h1>
+	<p id="teste">A soma de todos os números é: </p>
+	// entrada de dados com prompt, soma de valores e exibir o resultado
+	<script>
+	// Criando as variaveis	
+	var cont = 1;
+	var total = 0;
+	var numero = 0;
+
+	//Informar ao usuario o que ele precisa fazer
+	alert('Digite 10 números aleatorios');
+	//Mostra uma caixa de alerta informando o que usuario deve fazer
+
+	//Criando o laço de repetição
+	for(cont = 1; cont <= 10; cont++){
+		numero = parseInt (prompt('Digite o '+ cont + 'O número',''));
+		total = total + numero;
+		/*
+		cont -> começa em 1, usado como contador
+		total -> começa com 0, vai acumalar a soma dos numeros
+		numero -> guarda temporariamente cada numero digitado pelo usuario
+		alert... -> mostra uma caixa de alerta informando o que o usuario deve fazer
+		o laço vai cont = 1 ate cont 10
+		e	m cada' repetição:
+		* promt(...) pede ao usuario que digite um numero
+		* parseINT(...) converte o texto digitado em numero inteiro
+		* esse numero é somado ao total
+		*/
+	}
+
+	// Msotrando o resultado 
+	document.getElementById('teste').innerHTML += total;
+	/* 
+	depois que o loop termina, o valor acumulado em total'
+	é exibido dentro do elemento HTML com 'id='teste''*/
+	</script>
+
+</body>
+</html>

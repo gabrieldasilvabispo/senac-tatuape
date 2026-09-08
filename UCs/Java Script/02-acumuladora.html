@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Variável acumuladora</title>
+</head>
+<body>
+	<h1>Variável acumuladora</h1>
+	<p id="teste">O total de vendas foi: </p>
+
+	<script>
+		/*
+		Codigo exemplo de controle de quantidade de entradas.
+		O usuario informa quantas vendas foram feitas no dia.
+		Digita os valores de cada venda,
+		e o programa calcula o total das vendas
+		*/
+
+		//Criando as variaveis
+		var cont = 1;  // Contador do loop
+		var total = 0; // Acumulador da soma das vendas
+		var venda = 0; // Valor de cada venda
+		var fim =0;    // Quantidade de vendas
+		
+		
+		// Solicitar as usuario a quantidade de vendas do dia 
+		fim = parseInt(prompt('Digite a quantidade de vendas',''));
+		/* Prompt(..) -> pergunta ao usuario quantas vendas foram feitas
+		*/
+
+		//Criando o laço de repetição
+		for (cont = 1; cont <= fim; cont++){
+			venda = parseFloat(prompt('Digite o valor da '+ cont + 'a venda',''))
+			total = total + venda;
+		}
+
+		document.getElementById('teste').innerHTML += total;
+
+	</script>
+
+</body>
+</html>
