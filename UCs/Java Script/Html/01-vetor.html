@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exemplo de vetor</title>
+</head>
+<body>
+	<h1>Exemplo de vetor</h1>
+	<p id="teste1">Conteúdo do vetor 1: </p>
+	<p id="teste2">Conteúdo do vetor 2: </p>
+	<p id="teste3">Segunda posição do vetor 1: </p>
+	<p id="teste4">Terceira posição do vetor 2: </p>
+
+	<script>
+	//Criando vetores 
+	
+	var cores1 = ['Verde','Amarelo','Azul','Branco']; // cores1 é criado usando colchetes [] (a forma mais comun).
+	var cores2 = new Array ('Laranja','Vermelho','Preto','Cinza');
+	// cores2 é criado usando o construtor new Array(...)
+	// Ele é usado para criar um novo Array, e ele pode ser sobrescrito]
+	// Ambos armazenam listas de Strings 
+	
+	// Mostrar os couteudos dos vetores
+	document.getElementById('teste1').innerHTML += cores1;     // Mostrar todo o vetor cores1 dentro do elemento com o id teste1 
+	document.getElementById('teste2').innerHTML += cores2;     // Mostrar todo o vetor cores2 dentro do elemento com o id teste2
+	document.getElementById('teste3').innerHTML += cores1 [1]; // Mostrar apenas o segundo elemento do vetor cores1 (indice1)
+	document.getElementById('teste4').innerHTML += cores2 [2]; //Mostrar apenas o terceiro elemento do vetor cores2(indice2)	
+
+	</script>
+
+</body>
+</html>

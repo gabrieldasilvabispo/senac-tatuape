@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exemplo de vetor</title>
+</head>
+<body>
+	<h1>Exemplo de vetor</h1>
+	<p id="teste"></p>
+
+	<script>
+	// Percorrer o Array com um Loop FOR para montar uma lista dinamica
+	
+	var cores, resultado, fim, cont;  // Declaração de variaveis
+	cores = ['Verde','Amarelo','Azul','Branco']; // Cores  -> array com quatro cores
+	fim = cores.length; // fim -> recebe o tamanho do array [4]
+	// resultado e cont -> serão usadas para construir a lista e controlar o loop´
+
+	resultado = '<ul>'; // Começa a lista ordenada
+		for (cont = 0;  cont < fim; cont++){
+			resultado += '<li>' + cores[cont]+ '</li>';
+
+		}
+		resultado += '</ul>';
+		document.getElementById('teste').innerHTML = resultado;
+		
+	
+	
+	
+	</script>
+
+</body>
+</html>

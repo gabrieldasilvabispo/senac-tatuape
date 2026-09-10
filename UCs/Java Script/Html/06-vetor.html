@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exemplo de vetor</title>
+</head>
+<body>
+	<h1>Exemplo de vetor</h1>
+	<h3>Adiciona um ou mais elementos no final de um vetor</h3>
+	<p id="teste1">Vetor sem push: </p>
+	<p id="teste2">Vetor com push: </p>
+
+	<script>
+	// Este codigo mostra como adicionar elemenentos no final do array
+	// usando o metodo push(
+	
+	//Criando o vetor
+	var vetor = [1,2,3,4,5];
+
+	// Exibir o vetor no ID chamado 'teste1'
+	document.getElementById('teste1').innerHTML += vetor;
+	
+	// Adicionar elementos no final do vetor
+	vetor.push(6,7);
+
+	//Exibir novamente, agora com os elementos adicionados no final
+	document.getElementById('teste2').innerHTML += vetor;
+
+
+
+
+
+	
+
+</script>
+
+</body>
+</html>
