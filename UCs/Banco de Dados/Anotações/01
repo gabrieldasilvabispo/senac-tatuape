@@ -1,0 +1,14 @@
+
+create table produtos(
+idProduto int not null auto_increment,
+codigoBarras varchar(100) unique,
+descricao text not null,
+categoria varchar(100),
+precoCusto decimal(8,2) not null,
+precoVenda decimal(8,2) not null,
+quantidade int not null,
+estoqueMinimo int not null,
+idFornecedor int,
+foreign key (idFornecedor) references fornecedores(idFornecedor),
+primary key(idProduto)
+) default charset = utf8;
