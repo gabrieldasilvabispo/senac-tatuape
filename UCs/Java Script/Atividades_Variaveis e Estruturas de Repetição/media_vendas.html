@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+    <title>Exercício 4</title>
+</head>
+<body>
+
+    <h1>Faturamento das vendas</h1>
+    <p id="resultado"></p>
+
+    <script type="text/javascript">
+    var quantidade = parseInt(prompt('Digite a quantidade de vendas:'));
+    var faturamento = 0;
+    for (var i = 1; i <= quantidade; i++) {
+    var valor = parseFloat(prompt('Digite o valor da venda ' + i + ':'));
+    faturamento = faturamento + valor;
+    }
+    var media = faturamento / quantidade;
+    document.getElementById('resultado').innerHTML =
+    'Faturamento total: R$ ' + faturamento.toFixed(2) + '<br>' +
+    'Média das vendas: R$ ' + media.toFixed(2);
+
+    </script>
+
+</body>
+</html>

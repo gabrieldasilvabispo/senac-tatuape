@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 2</title>
+</head>
+<body>
+
+    <h1>Média da turma</h1>
+    <p id="resultado"></p>
+
+    <script type="text/javascript">
+    var somaNotas = 0;
+    for (var i = 1; i <= 5; i++) {
+    var nota = parseFloat(prompt('Digite a nota do aluno ' + i + ':'));
+    somaNotas = somaNotas + nota;
+    }
+    var media = somaNotas / 5;
+    document.getElementById('resultado').innerHTML ='Média da turma: ' + media;
+
+    </script>
+
+</body>
+</html>

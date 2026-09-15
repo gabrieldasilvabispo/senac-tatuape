@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 3</title>
+</head>
+<body>
+
+    <h1>Total da compra</h1>
+    <p id="resultado"></p>
+
+    <script type="text/javascript">
+    var quantidade = parseInt(prompt('Quantos produtos foram comprados?'));
+    var total = 0;
+    for (var i = 1; i <= quantidade; i++) {
+    var valor = parseFloat(prompt('Digite o valor do produto ' + i + ':'));
+    total = total + valor;
+    }
+    document.getElementById('resultado').innerHTML =
+    'Valor total da compra: R$ ' + total.toFixed(2);
+
+    </script>
+
+</body>
+</html>
