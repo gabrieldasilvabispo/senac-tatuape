@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercício 6</title>
+</head>
+<body>
+
+    <h1>Tabuadas de 1 a 10</h1>
+    <p id="resultado"></p>
+
+    <script type="text/javascript">
+    for (var i = 1; i <= 10; i++) {
+    document.getElementById('resultado').innerHTML +='<b>Tabuada do ' + i + '</b><br>';
+    for (var j = 1; j <= 10; j++) {
+    document.getElementById('resultado').innerHTML +=
+    i + ' x ' + j + ' = ' + (i * j) + '<br>';
+    }
+    document.getElementById('resultado').innerHTML += '<br>';
+    }
+
+    </script>
+
+</body>
+</html>
