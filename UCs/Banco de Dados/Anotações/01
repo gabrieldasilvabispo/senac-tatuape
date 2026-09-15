@@ -8,6 +8,7 @@ precoCusto decimal(8,2) not null,
 precoVenda decimal(8,2) not null,
 quantidade int not null,
 estoqueMinimo int not null,
+// Adicionando a chave estrangeira // 
 idFornecedor int,
 foreign key (idFornecedor) references fornecedores(idFornecedor),
 primary key(idProduto)
