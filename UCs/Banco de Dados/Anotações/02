@@ -1,0 +1,7 @@
+select produtos.idProduto, produtos.descricao, produtos.categoria, produtos.precoVenda, produtos.quantidade, produtos.estoqueMinimo, fornecedores.nome as fornecedor
+from produtos
+inner join fornecedores
+on fornecedores.idFornecedor = produtos.idFornecedor;
+
+
+
