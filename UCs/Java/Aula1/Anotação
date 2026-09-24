@@ -1,0 +1,119 @@
+# Java — Anotações de Aula
+
+> Página inicial das anotações de **Java** desenvolvidas durante o Curso Técnico de Informática — Senac Tatuapé.
+
+---
+
+## Sobre esta documentação
+
+Este material reúne minhas anotações de estudo sobre **Java**, organizadas de forma progressiva conforme o conteúdo apresentado em aula.
+
+A documentação foi criada para facilitar a revisão dos conceitos, registrar exemplos práticos e servir como referência durante o desenvolvimento dos exercícios.
+
+---
+
+## Conteúdos Estudados
+
+Até o momento, foram registrados os seguintes assuntos:
+
+- História e origem do Java
+- Conceito **WORA — Write Once, Run Anywhere**
+- Arquitetura do Java
+- **JVM — Java Virtual Machine**
+- **JDK — Java Development Kit**
+- IDEs para desenvolvimento Java
+- Compilação com `javac`
+- Execução com `java`
+- Bytecode e arquivos `.class`
+- Estrutura básica de um programa Java
+- Método `main`
+- `System.out.println()`
+- Variáveis e tipos de dados
+- `String`, `int`, `double`, `float`, `boolean` e `char`
+- Operadores aritméticos
+- Operadores de atribuição
+- Incremento e decremento
+- Operadores comparativos
+- Operadores lógicos
+- Convenções de nomenclatura
+- Compilação pelo terminal
+- Criação de projetos no Eclipse
+- Erros comuns e boas práticas
+
+---
+
+## Estrutura Básica
+
+```java
+public class Hello {
+
+    public static void main(String[] args) {
+
+        System.out.println("Hello World!");
+    }
+}
+```
+
+---
+
+## Fluxo de Execução do Java
+
+```text
+Código-fonte
+Arquivo .java
+     ↓
+Compilador javac
+     ↓
+Bytecode
+Arquivo .class
+     ↓
+JVM
+     ↓
+Sistema Operacional
+```
+
+---
+
+## Comandos Principais
+
+### Compilar
+
+```bash
+javac Arquivo.java
+```
+
+### Executar
+
+```bash
+java Arquivo
+```
+
+> 💡 No comando `java`, não é necessário informar a extensão `.class`.
+
+---
+
+## Organização das Anotações
+
+| Tema | Conteúdo |
+|---|---|
+| **Introdução ao Java** | História, origem e principais características |
+| **JVM / JDK / IDE** | Ferramentas e funcionamento do ambiente Java |
+| **Variáveis e Tipos** | Tipos primitivos e `String` |
+| **Operadores** | Aritméticos, atribuição, comparação e lógica |
+| **Exemplos Práticos** | Programas desenvolvidos durante as aulas |
+| **Terminal** | Compilação e execução manual |
+| **Eclipse** | Criação e organização de projetos |
+| **Erros Comuns** | Cuidados importantes durante a programação |
+| **Boas Práticas** | Organização e nomenclatura do código |
+
+---
+
+## Objetivo
+
+O objetivo desta documentação é acompanhar minha evolução no aprendizado de **Java**, mantendo os conteúdos organizados para estudo, consulta e revisão futura.
+
+O material será atualizado conforme novos assuntos forem apresentados em aula.
+
+---
+
+*Documentação produzida durante o Curso Técnico de Informática — Senac Tatuapé*
