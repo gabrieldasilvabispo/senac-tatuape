@@ -53,6 +53,20 @@ public class LacoRepeticao {
 	
 	
 	
+	System.out.println("");
+	String sinal = "Verde";
+	
+	do {
+		System.out.println("O sinal esta " + sinal);
+		sinal = "Vermelho";
+	} while (sinal == "Verde");
+	
+	System.out.println("O sinal mudou, Pare: ");
+	
+	
 	}
 
-}
+	}
+	
+	
+
