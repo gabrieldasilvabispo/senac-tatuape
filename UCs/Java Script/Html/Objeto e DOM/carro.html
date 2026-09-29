@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exemplo de DOM</title>
+</head>
+<body>
+	<h1>Eventos onmousedown e onmouseup</h1>
+	<img src="carro-ver.jpg" alt="Lampada"
+	title="Carros" id="carro"
+	onmousedown="Carro1()" onmouseup="Carro2()">
+	<p>Clique na lâmpada e mantenha o mouse pressionado</p>
+
+	<script>
+	//Declarando a função Acende
+	function Carro1(){
+		document.getElementById('carro').src='carro-ver.jpg';
+	}
+	//Declarando a função Apaga
+	function Carro2(){
+		document.getElementById('carro').src='carro-la.jpg';
+	}
+	</script>
+</body>
+</html>

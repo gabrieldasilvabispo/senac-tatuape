@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Objeto em JavaScript</title>
+</head>
+<body>
+	<h1>Objeto em JavaScript</h1>
+
+
+	<script>
+	// Criando o Objetivo
+	var pessoa = {
+		nome:'Joaquim',
+		sobrenome:'Da Silva',
+		idade: 30,
+		olhos: 'Castanhos',
+		peso: 80,
+		altura: 1.80,
+		fone: '(11)981234-5678',
+		endereco:'Avenida Paulista',
+		numero:1010,
+		cidade:'São Paulo',
+		bairro:'Jardim Paulistano',
+		estado:'SP',
+		cep:'03110-100',
+		nomeCompleto:function(){
+			return this.nome + ''+this.sobrenome;
+			/* O objeto pessoa que tem propriedades 
+			como: nome, idade, cidade,...) que guardam informações
+			tambem possui metodos (funções dentro do objeto):
+			nomeCompleto(): retornar o nome e sobrenome juntos */
+		
+		},
+		endCompleto:function(){
+			return this.endereco + ','+
+				   this.numero + '<br>'+
+				   this.bairro+'<br>'+
+				   this.cidade+'-'+
+				   this.estado+'<br>'+
+				   this.cep;
+
+
+		} 
+		
+	}
+	// Mostrar os dados de um objeto
+	document.write(pessoa.nomeCompleto()+'<br>');
+	//document.write escreve diretamente no corpo da pagina HTML
+	document.write(pessoa.endCompleto());
+	//Primeiro mostra' o nome completo depois o endereço completo
+
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+```html
+<!DOCTYPE html>
+ 
+<html lang="pt-br">
+ 
+<head>
+ 
+    <meta charset="utf-8">
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <title>Exemplo de DOM</title>
+ 
+    <style>
+ 
+        #quadrado {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            border: 1px solid black;
+			background-color: rgb(81, 155, 217);
+        }
+ 
+        #bola {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(60, 14, 175);
+            border-radius: 50%;
+            position: absolute;
+        }
+ 
+    </style>
+ 
+</head>
+ 
+<body>
+ 
+    <h1>Exemplo de setInterval() e clearInterval()</h1>
+ 
+    <p>
+        <button type="button" onclick="anima()">Anima</button>
+    </p>
+ 
+    <div id="quadrado">
+ 
+        <div id="bola"></div>
+ 
+    </div>
+ 
+    <script>
+ 
+        function anima(){
+ 
+            var elemento = document.getElementById('bola');
+            var posicao = 0;
+ 
+            var id = setInterval(local, 5);
+ 
+            // declarando a funcao local
+            function local() {
+ 
+                if (posicao == 350){
+ 
+                    clearInterval(id);
+                    volta();
+ 
+                }
+ 
+                else{
+ 
+                    posicao++;
+ 
+                    elemento.style.top = posicao + 'px'; // move pra baixo
+                    elemento.style.left = posicao + 'px'; // move pra direita
+ 
+                }
+ 
+            }
+ 
+        }
+ 
+ 
+        function volta(){
+ 
+            var elemento = document.getElementById('bola');
+            var posicao = 350;
+ 
+            var id = setInterval(local, 5);
+ 
+            // declarando a funcao local
+            function local() {
+ 
+                if (posicao == 0){
+ 
+                    clearInterval(id);
+ 
+                }
+ 
+                else{
+ 
+                    posicao--;
+ 
+                    elemento.style.top = posicao + 'px'; // move pra cima
+                    elemento.style.left = posicao + 'px'; // move pra esquerda
+ 
+                }
+ 
+            }
+ 
+        }
+ 
+    </script>
+ 
+</body>
+ 
+</html>
+```
+ 
