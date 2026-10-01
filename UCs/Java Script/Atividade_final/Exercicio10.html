@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 10</title>
+</head>
+<body>
+
+    <h1>Objeto Funcionário</h1>
+
+    <p id="resultado"></p>
+
+    <button onclick="mostrarFuncionario()">Exibir Funcionário</button>
+
+    <script>
+    var funcionario = {
+        nome: "Gabriel",
+        cargo: "TI",
+        salario: 2500,
+
+    aumento: function(percentual) {
+        return this.salario + (this.salario * percentual / 100);
+            }
+        };
+
+    function mostrarFuncionario() {
+           var percentual = 15;
+
+    document.getElementById("resultado").innerHTML = "Nome: " + funcionario.nome +
+                "<br>Cargo: " + funcionario.cargo +
+                "<br>Salário atual: R$ " + funcionario.salario +
+                "<br>Percentual de aumento: " + percentual + "%" +
+                "<br>Novo salário: R$ " + funcionario.aumento(percentual);
+        }
+    </script>
+
+</body>
+</html>

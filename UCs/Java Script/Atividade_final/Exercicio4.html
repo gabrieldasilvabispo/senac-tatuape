@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 4</title>
+</head>
+<body>
+
+    <h1>Potenciação</h1>
+
+    <p id="resultado"></p>
+
+    <button onclick="mostrarResultado()">Calcular</button>
+
+    <script>
+    function quadrado(numero) {
+    return numero * numero;
+    }
+    function cubo(numero) {
+    return numero * numero * numero;
+    }
+    function mostrarResultado() {
+     var numero = 5;
+    document.getElementById("resultado").innerHTML = "Quadrado de 5: " + quadrado(numero) +
+    "<br>Cubo de 5: " + cubo(numero);
+        }
+    </script>
+
+</body>
+</html>

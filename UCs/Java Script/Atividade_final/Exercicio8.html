@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exercício 8</title>
+</head>
+<body>
+	<h1>Objeto Pessoa</h1>
+
+
+	<script>
+	// Criando o Objetivo
+	var aluno = {
+		nome:'Nome Completo: Gabriel',
+		sobrenome:' Bispo',
+		idade:'Idade: 30',
+		cidade:'Cidade: São Paulo',
+        curso: 'Curso : Tecnico em Informatica',
+		nomeCompleto:function(){
+			return this.nome + ''+ this.sobrenome;
+			
+		
+		},
+		endCompleto:function(){
+			return this.cidade+'<br>'+
+                   this.idade+'<br>'+
+                   this.curso;
+                  
+
+
+		} 
+		
+	}
+	// Mostrar os dados de um objeto
+	document.write(aluno.nomeCompleto()+'<br>');
+	//document.write escreve diretamente no corpo da pagina HTML
+	document.write(aluno.endCompleto());
+	//Primeiro mostra' o nome completo depois o endereço completo
+
+
+
+
+
+
+	</script>
+</body>
+</html>

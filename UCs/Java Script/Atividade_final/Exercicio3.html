@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 3</title>
+</head>
+<body>
+
+    <h1>Maior Número</h1>
+
+    <p id="resultado"></p>
+
+    <button onclick="maiorNumero(15, 10)">Testar 15 e 10</button>
+    <button onclick="maiorNumero(7, 20)">Testar 7 e 20</button>
+
+    <script>
+    function maiorNumero(a, b) {
+    if (a > b) {
+    document.getElementById("resultado").innerHTML =  "O maior número é: " + a;
+    } else {
+    document.getElementById("resultado").innerHTML = "O maior número é: " + b;
+            }
+        }
+    </script>
+
+</body>
+</html>

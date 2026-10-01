@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 5</title>
+</head>
+<body>
+
+    <h1>Calculadora Simples</h1>
+
+    <p id="resultado"></p>
+
+    <button onclick="soma(num1, num2)">Soma</button>
+    <button onclick="subtracao(num1, num2)">Subtração</button>
+    <button onclick="multiplicacao(num1, num2)">Multiplicação</button>
+    <button onclick="divisao(num1, num2)">Divisão</button>
+
+    <script>
+        var num1 = 20;
+        var num2 = 4;
+
+        function soma(a, b) {
+            document.getElementById("resultado").innerHTML = "Resultado: " + (a + b);
+        }
+
+        function subtracao(a, b) {
+        document.getElementById("resultado").innerHTML = "Resultado: " + (a - b);
+        }
+
+        function multiplicacao(a, b) {
+            document.getElementById("resultado").innerHTML = "Resultado: " + (a * b);
+        }
+
+        function divisao(a, b) {
+            document.getElementById("resultado").innerHTML = "Resultado: " + (a / b);
+        }
+    </script>
+
+</body>
+</html>

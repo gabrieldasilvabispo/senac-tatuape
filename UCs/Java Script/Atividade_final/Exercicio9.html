@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 9</title>
+</head>
+<body>
+
+    <h1>Objeto Produto</h1>
+
+    <p id="resultado"></p>
+
+    <button onclick="mostrarProduto()">Exibir Produto</button>
+
+    <script>
+    var produto = {
+        nome: "Notebook",
+        categoria: "Informática",
+        preco: 3500,
+        quantidade: 10,
+
+        valorEstoque: function() {
+           return this.preco * this.quantidade;
+            }
+        };
+
+    function mostrarProduto() {
+    document.getElementById("resultado").innerHTML = "Nome: " + produto.nome +
+                "<br>Categoria: " + produto.categoria +
+                "<br>Preço: R$ " + produto.preco +
+                "<br>Quantidade: " + produto.quantidade +
+                "<br>Valor total em estoque: R$ " + produto.valorEstoque();
+        }
+    </script>
+
+</body>
+</html>

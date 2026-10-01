@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 12</title>
+</head>
+<body>
+
+    <h1>Semáforo Interativo</h1>
+
+    <img id="semaforo" src="vermelho.png" width="150">
+
+    <br><br>
+
+    <button onclick="vermelho()">Vermelho</button>
+    <button onclick="amarelo()">Amarelo</button>
+    <button onclick="verde()">Verde</button>
+
+    <script>
+    function vermelho() {
+    document.getElementById("semaforo").src = "vermelho.jpg";
+        }
+
+    function amarelo() {
+    document.getElementById("semaforo").src = "amarelo.jpg";
+        }
+
+    function verde() {
+    document.getElementById("semaforo").src = "verde.jpg";
+        }
+    </script>
+
+</body>
+</html>

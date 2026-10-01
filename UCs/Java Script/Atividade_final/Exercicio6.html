@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 6</title>
+</head>
+<body>
+
+    <h1>Cálculo de Desconto</h1>
+
+    <p id="resultado"></p>
+
+    <button onclick="mostrarDesconto()">Calcular Desconto</button>
+
+    <script>
+    function calcularDesconto(valorProduto, percentual) {
+    var desconto = valorProduto * percentual / 100;
+    var valorFinal = valorProduto - desconto;
+    return valorFinal;
+        }
+    function mostrarDesconto() {
+    var valorProduto = 250;
+    var percentual = 10;
+    document.getElementById("resultado").innerHTML = "Valor final: R$ " + calcularDesconto(valorProduto, percentual);
+        }
+    </script>
+
+</body>
+</html>

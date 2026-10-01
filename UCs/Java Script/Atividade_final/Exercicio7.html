@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 7</title>
+</head>
+<body>
+
+    <h1>Conversor de Temperatura</h1>
+
+    <p id="resultado"></p>
+
+    <button onclick="mostrarTemperatura()">Converter</button>
+
+    <script>
+    function celsiusParaFahrenheit(celsius) {
+    var fahrenheit = (celsius * 9 / 5) + 32;
+    return fahrenheit;
+        }
+    function mostrarTemperatura() {
+    var celsius = 30;
+    document.getElementById("resultado").innerHTML = "Temperatura em Fahrenheit: " + celsiusParaFahrenheit(celsius) + " °F";
+        }
+    </script>
+
+</body>
+</html>
