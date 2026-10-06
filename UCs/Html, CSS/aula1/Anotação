@@ -1,0 +1,411 @@
+
+
+Wiki fundamentos web v2 · MD
+# 🌐 Fundamentos da Web — Curso Técnico de Informática | Senac Tatuapé
+ 
+> História da Internet e da Web, protocolos, APIs, formatos de dados e arquitetura cliente-servidor.
+ 
+---
+ 
+## Sumário
+ 
+- [Internet vs Web — A Grande Diferença](#internet-vs-web--a-grande-diferença)
+- [HTML Não é Linguagem de Programação](#html-não-é-linguagem-de-programação)
+- [História da Internet e da Web](#história-da-internet-e-da-web)
+- [As Eras da Web (1.0, 2.0 e 3.0)](#as-eras-da-web-10-20-e-30)
+- [Serviços Web e Arquitetura de Comunicação](#serviços-web-e-arquitetura-de-comunicação)
+- [Estrutura de uma URL](#estrutura-de-uma-url)
+- [XML vs JSON](#xml-vs-json)
+- [SOAP vs REST](#soap-vs-rest)
+- [O Ciclo de uma Requisição Web](#o-ciclo-de-uma-requisição-web)
+- [Classificação dos Websites](#classificação-dos-websites)
+- [Servidores Web e Portas Padrão](#servidores-web-e-portas-padrão)
+- [Erros Comuns](#erros-comuns)
+- [Referência Rápida](#referência-rápida)
+---
+ 
+## Internet vs Web — A Grande Diferença
+ 
+| Conceito | O que é |
+|---|---|
+| **Internet** | A infraestrutura física e de rede global — cabos, roteadores, servidores conectados pelo mundo |
+| **Web (WWW)** | Um serviço que usa essa infraestrutura para transportar e visualizar documentos e hipertextos |
+ 
+> **Analogia:** a Internet é a rede de estradas e rodovias espalhadas pelo mundo. A Web são os caminhões e carros de entrega que trafegam por essas estradas levando encomendas (documentos, vídeos, sites) de um ponto a outro.
+ 
+> 💡 A Internet existe **sem** a Web — e-mail, transferência de arquivos (FTP) e outros serviços também rodam sobre a Internet sem usar o protocolo da Web. A Web é apenas **um** dos serviços que usam essa infraestrutura.
+ 
+---
+ 
+## HTML Não é Linguagem de Programação
+ 
+**HTML** (*Hypertext Markup Language*) é uma **linguagem de marcação** — estrutura e dá significado ao conteúdo de uma página (títulos, parágrafos, imagens, formulários).
+ 
+| HTML não tem | Quem faz isso na Web |
+|---|---|
+| Estruturas condicionais (`if/else`) | JavaScript |
+| Laços de repetição (loops) | JavaScript |
+| Cálculos complexos | JavaScript |
+ 
+> ⚠️ **Erro comum:** chamar o HTML de "linguagem de programação". O correto é dizer que você **estruturou** elementos com a **linguagem de marcação** HTML — a lógica de programação na Web fica a cargo do JavaScript.
+ 
+---
+ 
+## História da Internet e da Web
+ 
+### Guerra Fria e ARPANET
+ 
+A Internet nasceu no contexto de rivalidade da Guerra Fria entre EUA e URSS. Após o lançamento do satélite soviético **Sputnik-1** (1957), o governo americano criou a **ARPA/DARPA**.
+ 
+Em **29 de outubro de 1969**, nasceu a **ARPANET** — a primeira rede de computadores em pacotes, interligando inicialmente **4 nós**: UCLA, Stanford, UCSB e Utah.
+ 
+### Do NCP ao TCP/IP
+ 
+| Protocolo | Criador | Ano | Função |
+|---|---|---|---|
+| **NCP** (Network Control Protocol) | — | — | Primeiro protocolo usado; travava a comunicação durante transferências — pouca simultaneidade |
+| **TCP** (Transmission Control Protocol) | Robert (Bob) Kahn | 1972 | Fatiamento e controle de pacotes |
+| **IP** (Internet Protocol) | Vinton (Vint) Cerf | 1972 | Endereçamento dos pontos na rede |
+ 
+A união **TCP/IP** tornou-se o padrão universal de comunicação até hoje.
+ 
+> 💡 **TCP** fatia e controla os pacotes; **IP** endereça para onde eles vão — é literalmente a base de toda comunicação na Internet moderna.
+ 
+### A criação da WWW
+ 
+Em **1989/1990**, no **CERN**, **Tim Berners-Lee** (com ajuda de Robert Cailliau) criou a **World Wide Web (WWW)**.
+ 
+Tim Berners-Lee é responsável por uma **tríade fundamental** para a Web:
+ 
+| Criação | Função |
+|---|---|
+| **HTTP** | Protocolo de transferência de hipertexto |
+| **HTML** | Linguagem de marcação de páginas |
+| **WorldWideWeb** (navegador/editor) | O primeiro software para visualizar páginas web |
+ 
+Ele também fundou o **W3C** (*World Wide Web Consortium*) — órgão que padroniza as normas da Web até hoje.
+ 
+> ⚠️ **Erro comum:** confundir a criação da Internet com a criação da Web. A Internet (infraestrutura física) nasceu com a ARPANET em 1969, na Guerra Fria. Tim Berners-Lee criou a **Web** (WWW) em 1989, no CERN — são eventos distintos, separados por 20 anos.
+ 
+### A Internet no Brasil
+ 
+As primeiras conexões acadêmicas ocorreram em **1989**, entre o **LNCC** (Laboratório Nacional de Computação Científica) e a Universidade de Maryland (EUA). O registro de domínios **.br** foi estruturado sob responsabilidade da **FAPESP**.
+ 
+---
+ 
+## As Eras da Web (1.0, 2.0 e 3.0)
+ 
+A evolução da Web não é apenas tecnológica — é principalmente **comportamental**, sobre como os usuários interagem com a informação.
+ 
+| Era | Nome | Período | Foco da interação | Tecnologias-chave |
+|---|---|---|---|---|
+| **Web 1.0** | Web da Informação / Estática | ~1990–2000 | Leitura (unidirecional) | HTML simples, portais estáticos |
+| **Web 2.0** | Web Colaborativa / Social | ~2000–2010 | Leitura **e** escrita (interativa) | AJAX, redes sociais, blogs, SaaS |
+| **Web 3.0** | Web Semântica / Inteligente | ~2010–presente | Dados conectados, IA | Machine Learning, Blockchain, IoT |
+ 
+### Web 1.0 — Web da Informação
+ 
+Páginas estáticas em HTML simples, comunicação **unidirecional** (apenas leitura). O usuário consumia o conteúdo sem produzir interações complexas.
+ 
+### Web 2.0 — Web Colaborativa
+ 
+Foco na interatividade, leitura **e** escrita, redes sociais, blogs, fóruns e **conteúdo gerado pelo usuário (UGC)**. Termo popularizado por Tim O'Reilly.
+ 
+### Web 3.0 — Web Semântica e Inteligente
+ 
+Dados conectados e interpretáveis por máquinas (Web Semântica), uso de Inteligência Artificial, Machine Learning, personalização de experiências, aplicações descentralizadas (Blockchain) e IoT.
+ 
+> 💡 **Guia rápido de memorização:** Web 1.0 = Leitura. Web 2.0 = Leitura + Escrita. Web 3.0 = Semântica + Dados Conectados + IA.
+ 
+---
+ 
+## Serviços Web e Arquitetura de Comunicação
+ 
+**Web Services** são soluções que permitem **interoperabilidade** — a comunicação entre sistemas diferentes, construídos em linguagens distintas.
+ 
+### API
+ 
+**API** (*Application Programming Interface*) é a interface que funciona como intermediária, permitindo que dois softwares troquem dados de forma segura e padronizada.
+ 
+> 💡 **Analogia:** a API é a ponte de comunicação entre sistemas — cada sistema fala sua própria "língua" internamente, mas ambos conseguem se entender através da API.
+ 
+### HTTP
+ 
+**HTTP** (*Hypertext Transfer Protocol*) é o protocolo da camada de aplicação do modelo cliente-servidor, usado para transferência de dados na Web.
+ 
+### URI vs URL
+ 
+| Termo | O que é |
+|---|---|
+| **URI** (*Uniform Resource Identifier*) | Identificador **genérico** que nomeia ou localiza um recurso na rede |
+| **URL** (*Uniform Resource Locator*) | Um **tipo específico** de URI que informa o endereço exato e o protocolo de acesso a um recurso |
+ 
+> ⚠️ URI e URL **não são conceitos opostos** — toda URL é uma URI. A URL é apenas uma das formas existentes de identificar um recurso através de sua localização na rede.
+ 
+---
+ 
+## Estrutura de uma URL
+ 
+```
+https://www.exemplo.com.br:443/cursos/aula?id=15#conceito
+```
+ 
+| Parte | Nome | Função |
+|---|---|---|
+| `https://` | Protocolo | Regra de comunicação segura (HTTP + SSL/TLS) |
+| `www.exemplo.com.br` | Domínio / Host | Nome amigável mapeado para o IP do servidor |
+| `:443` | Porta | Porta de comunicação do servidor (443 = HTTPS padrão; 80 = HTTP padrão) |
+| `/cursos/aula` | Caminho (Path) | Recurso ou pasta dentro do servidor |
+| `?id=15` | Query String | Parâmetros no formato `chave=valor` |
+| `#conceito` | Âncora (Fragment) | Aponta para uma seção específica dentro da própria página |
+ 
+---
+ 
+## XML vs JSON
+ 
+Dois formatos principais para troca de dados entre cliente e servidor.
+ 
+### Mesmo dado, dois formatos
+ 
+**XML:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<aluno>
+    <id>101</id>
+    <nome>Gabriel Loza</nome>
+    <curso>Técnico em Informática</curso>
+    <ativo>true</ativo>
+</aluno>
+```
+ 
+**JSON:**
+```json
+{
+  "id": 101,
+  "nome": "Gabriel Loza",
+  "curso": "Técnico em Informática",
+  "ativo": true
+}
+```
+ 
+### Comparativo
+ 
+| Característica | XML | JSON |
+|---|---|---|
+| Sintaxe | Baseada em tags (`<tag>`) | Pares `chave: valor` |
+| Peso / Tamanho | Mais pesado / verboso | Mais leve e compacto |
+| Leitura por JS | Requer parse de documento DOM | Nativo do JavaScript (`JSON.parse()`) |
+| Uso principal | Sistemas legados, SOAP, NF-e | APIs RESTful modernas, apps Web/Mobile |
+ 
+> 💡 No XML, cada dado precisa de tag de abertura **e** fechamento (`<nome>...</nome>`) — isso gera um arquivo mais pesado. No JSON, a estrutura usa `{}` e `"chave": valor`, resultando em sintaxe mais limpa, mais rápida para transmitir e fácil de ler via JavaScript.
+ 
+---
+ 
+## SOAP vs REST
+ 
+Estilos e protocolos de integração entre sistemas:
+ 
+| Conceito | O que é |
+|---|---|
+| **RPC** (*Remote Procedure Call*) | Permite que um programa execute um procedimento/função em um computador remoto |
+| **SOAP** (*Simple Object Access Protocol*) | Protocolo **rígido** de mensagens, baseado em XML e HTTP |
+| **REST** (*Representational State Transfer*) | Estilo arquitetural **flexível** que usa métodos nativos do HTTP (`GET`, `POST`, `PUT`, `DELETE`) |
+ 
+| Padrão | Tipo | Formato de dados | Complexidade |
+|---|---|---|---|
+| **SOAP** | Protocolo rígido | Apenas XML | Alta (contratos estritos) |
+| **REST** | Estilo arquitetural | JSON (preferencial), XML, HTML, texto | Baixa / flexível |
+ 
+> 💡 REST é o estilo arquitetural mais usado em web services modernos — prefere conexões HTTP simples e payloads leves em JSON, o que o torna mais rápido e fácil de implementar que o SOAP.
+ 
+---
+ 
+## O Ciclo de uma Requisição Web
+ 
+Quando o usuário digita uma URL e pressiona Enter:
+ 
+```
+1. Resolução de Nome (DNS)
+   O navegador pede ao servidor DNS que converta o endereço
+   de texto (ex: google.com) no IP numérico do servidor.
+ 
+2. Estabelecimento de Conexão (TCP/IP)
+   Abre-se uma conexão de rede entre cliente e servidor
+   através do protocolo TCP/IP.
+ 
+3. Requisição HTTP (Request)
+   O navegador envia uma mensagem HTTP (método GET)
+   solicitando o arquivo da página.
+ 
+4. Processamento no Servidor
+   O servidor processa a solicitação, busca os arquivos
+   no banco de dados ou disco e prepara a resposta.
+ 
+5. Resposta HTTP (Response)
+   O servidor envia a resposta com um código de status
+   (ex: 200 OK) junto com os dados (HTML, CSS, JS, JSON).
+ 
+6. Renderização no Navegador
+   O navegador lê os arquivos, interpreta o HTML, aplica o
+   CSS, executa o JavaScript e desenha a interface na tela.
+```
+ 
+> 💡 Esse ciclo acontece em frações de segundo, mas entender cada etapa ajuda a diagnosticar problemas — por exemplo, se o DNS falhar, o navegador nem consegue achar o servidor; se o servidor demorar no passo 4, a página "trava carregando".
+ 
+---
+ 
+## Classificação dos Websites
+ 
+| Tipo | Foco | Exemplos |
+|---|---|---|
+| **Portais Web** | Agrupam conteúdos heterogêneos de várias fontes | G1, UOL |
+| **Buscadores** | Indexação e pesquisa por palavras-chave | Google, Bing |
+| **Sites Corporativos** | História, serviços e contatos de uma empresa | Páginas institucionais |
+| **Sites Educativos** | Ensino e EAD | Portais escolares, plataformas de cursos |
+| **Redes Sociais** | Conexão interpessoal e compartilhamento de mídia | — |
+| **Blogs** | Publicações cronológicas de artigos e opiniões | — |
+| **Sites da Imprensa** | Versões digitais de jornais e revistas | — |
+| **Sites Bancários** | Serviços financeiros com segurança reforçada | — |
+| **E-commerce** | Compra e venda de produtos/serviços | — |
+| **Aplicativos Web (SaaS)** | Softwares executados no navegador, sem instalação | Google Docs, Canva |
+| **Sites Multimídia** | Consumo de áudio/vídeo em fluxo contínuo | YouTube, Spotify |
+ 
+---
+ 
+## Servidores Web e Portas Padrão
+ 
+Páginas web são armazenadas em **Servidores Web** (Apache, Nginx, IIS), que escutam portas de rede específicas:
+ 
+| Porta | Protocolo | Uso |
+|---|---|---|
+| **80** | HTTP | Tráfego web **não criptografado** |
+| **443** | HTTPS | Tráfego **criptografado** (HTTP + TLS/SSL) |
+ 
+### O padrão W3C
+ 
+Seguir as diretrizes do **W3C** garante que o código HTML/CSS funcione de forma consistente em diferentes navegadores (Chrome, Firefox, Safari, Edge) e atenda a critérios universais de **Acessibilidade Web (WCAG)**.
+ 
+---
+ 
+## Erros Comuns
+ 
+| Erro | Correção |
+|---|---|
+| Chamar HTML de "linguagem de programação" | HTML é linguagem de **marcação** — a lógica fica com JavaScript |
+| Dizer que Tim Berners-Lee criou a Internet | Ele criou a **Web (WWW)** em 1989; a Internet nasceu com a ARPANET em 1969 |
+| Tratar URI e URL como conceitos opostos | Toda URL **é** uma URI — URL é um tipo específico de URI |
+ 
+---
+ 
+## Referência Rápida
+ 
+| Conceito | Significado |
+|---|---|
+| **Internet** | Infraestrutura física de rede global |
+| **Web (WWW)** | Sistema de hipertextos que roda sobre a Internet |
+| **TCP/IP** | Base de conexões da Internet — TCP fatia, IP endereça |
+| **HTTP** | Protocolo de transferência de hipertexto |
+| **HTML** | Linguagem de marcação (não é programação) |
+| **API** | Ponte de comunicação entre sistemas diferentes |
+| **URI** | Identificador genérico de um recurso |
+| **URL** | Tipo específico de URI — endereço completo |
+| **XML** | Formato de dados baseado em tags |
+| **JSON** | Formato leve de dados em pares chave:valor |
+| **REST** | Estilo arquitetural flexível, usa métodos HTTP |
+| **SOAP** | Protocolo rígido baseado em XML |
+| **Porta 80** | HTTP (não criptografado) |
+| **Porta 443** | HTTPS (criptografado) |
+| **W3C** | Órgão que padroniza as normas da Web |
+ 
+---
+ 
+*Documentação produzida durante o Curso Técnico de Informática — Senac Tatuapé*
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
