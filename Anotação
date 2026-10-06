@@ -1,0 +1,268 @@
+Fundamentos da Web, História da Internet e Serviços Web
+Visão Geral
+
+Nesta aula, entendi como a infraestrutura da Internet surgiu e evoluiu até se transformar no ecossistema atual de desenvolvimento web. Compreendi a diferença crucial entre a Internet (a rede física global de computadores interconectados) e a World Wide Web (WWW) (o sistema de documentos e sistemas interligados que rodam sobre essa rede).
+
+Esse conhecimento é a base necessária para o meu desenvolvimento em HTML, CSS e JavaScript, pois me ajuda a entender onde essas tecnologias são executadas, como os navegadores interpretam os dados e como as aplicações web modernas se comunicam com servidores através de APIs e serviços web.
+
+Entendendo o Conceito
+
+A Grande Diferença: Internet vs. Web
+Internet: É a infraestrutura física e de rede global.
+
+Analogia: Pense na Internet como uma grande rede de estradas e rodovias espalhadas pelo mundo.
+
+Web (WWW): É um serviço que utiliza essa infraestrutura para transportar e visualizar dados em forma de páginas e hipertextos.
+
+Analogia: A Web são os caminhões e carros de entrega que trafegam por essas estradas levando encomendas (documentos, vídeos, sites) de um ponto a outro.
+
+O HTML NÃO é uma Linguagem de Programação
+
+Um ponto fundamental que fixa a base do desenvolvimento front-end:
+
+HTML (Hypertext Markup Language) é uma linguagem de marcação. Ela serve para estruturar e dar significado ao conteúdo de uma página (títulos, parágrafos, imagens, formulários).
+
+Ela não possui lógica de programação, como estruturas condicionais (if/else), laços de repetição (loops) ou cálculos complexos. A lógica de programação na Web fica a cargo do JavaScript.
+
+Conceitos Fundamentais
+História da Internet e da Web
+
+Guerra Fria e ARPANET: A Internet nasceu em meio ao contexto de rivalidade da Guerra Fria entre EUA e URSS. Após o lançamento do satélite soviético Sputnik-1 (1957), o governo americano criou a ARPA/DARPA. Em 29 de outubro de 1969, nasceu a ARPANET, a primeira rede de computadores em pacotes, interligando inicialmente 4 nós (UCLA, Stanford, UCSB e Utah).
+
+Do NCP ao TCP/IP:
+
+O primeiro protocolo usado foi o NCP (Network Control Protocol), mas ele travava a comunicação quando uma transferência estava em andamento, permitindo pouca simultaneidade.
+
+Em 1972, Robert (Bob) Kahn desenvolveu o protocolo TCP (fatiamento e controle de pacotes).
+
+Vinton (Vint) Cerf desenvolveu o protocolo IP (endereçamento dos pontos na rede). A união TCP/IP tornou-se o padrão universal de comunicação até hoje.
+
+A Criação da WWW e das Tecnologias Web:
+
+Em 1989/1990, no CERN, Tim Berners-Lee (com ajuda de Robert Cailliau) criou a World Wide Web (WWW).
+
+Tim Berners-Lee é responsável por uma tríade fundamental para a Web:
+
+HTTP: Protocolo de transferência de hipertexto.
+
+HTML: Linguagem de marcação de páginas.
+
+Navegador/Editor (WorldWideWeb): O primeiro software para visualizar páginas web.
+
+Ele também fundou o W3C (World Wide Web Consortium), órgão que padroniza as normas da Web.
+
+Chegada da Internet no Brasil:
+
+As primeiras conexões acadêmicas ocorreram em 1989 entre o LNCC (Laboratório Nacional de Computação Científica) e a Universidade de Maryland (EUA). O registro de domínios .br foi estruturado sob responsabilidade da FAPESP.
+
+As Eras da Web (1.0, 2.0 e 3.0)
+
+A evolução da Web não é apenas tecnológica, mas principalmente comportamental de como os usuários interagem com a informação:
+
+Web 1.0 (Web da Informação / Estática):
+Período: ~1990 a 2000.
+
+Características: Páginas estáticas em HTML simples, comunicação unidirecional (apenas leitura). O usuário consumia o conteúdo sem produzir interações complexas.
+
+Web 2.0 (Web Colaborativa / Social):
+Período: ~2000 a 2010.
+
+Características: Foco na interatividade, leitura e escrita, redes sociais, blogs, fóruns e conteúdo gerado pelo próprio usuário (UGC). Termo popularizado por Tom O'Reilly.
+
+Web 3.0 (Web Semântica e Inteligente):
+Período: ~2010 até o presente.
+
+Características: Dados conectados e interpretáveis por máquinas (Web Semântica), uso de Inteligência Artificial, Machine Learning, personalização de experiências, aplicações descentralizadas (Blockchain) e IoT.
+
+Serviços Web e Arquitetura de Comunicação
+Os Web Services são soluções que permitem a interoperabilidade: a comunicação entre sistemas diferentes construídos em linguagens distintas.
+
+API (Application Programming Interface): Interface que funciona como intermediária, permitindo que dois softwares troquem dados de forma segura e padronizada.
+
+HTTP (Hypertext Transfer Protocol): Protocolo da camada de aplicação do modelo cliente-servidor usado para transferência de dados na Web.
+
+URI vs. URL:
+
+URI (Uniform Resource Identifier): Identificador genérico que nomeia ou localiza um recurso na rede.
+
+URL (Uniform Resource Locator): Um tipo específico de URI que informa o endereço exato e o protocolo de acesso a um recurso (ex: [https://site.com/pagina.html](https://site.com/pagina.html)).
+
+Formatos de Troca de Dados:
+
+XML (Extensible Markup Language): Linguagem de marcação baseada em tags personalizadas, estruturada e autocontida.
+
+JSON (JavaScript Object Notation): Formato leve de representação de dados em pares chave: valor, nativo da estrutura de objetos do JavaScript e amplamente usado em APIs modernas.
+
+Estilos e Protocolos de Integração:
+
+RPC (Remote Procedure Call): Permite que um programa execute um procedimento/função em um computador remoto.
+
+SOAP (Simple Object Access Protocol): Protocolo rígido de mensagens baseado em XML e HTTP.
+
+REST (Representational State Transfer): Estilo arquitetural flexível que utiliza os métodos nativos do HTTP (GET, POST, PUT, DELETE) para manipulação de recursos, sendo muito utilizado junto com JSON.
+
+Classificação dos Websites
+Os sites são categorizados de acordo com seu objetivo e estrutura principal:
+
+Portais Web: Agrupam conteúdos heterogêneos de diversas fontes em um só lugar (ex: G1, UOL).
+
+Buscadores: Ferramentas focadas na indexação e pesquisa de conteúdo por palavras-chave (ex: Google, Bing).
+
+Sites Corporativos: Paginas institucionais que mostram a história, serviços e contatos de uma empresa.
+
+Sites Educativos: Plataformas focadas no ensino e EAD (ex: portais escolares, plataformas de cursos).
+
+Redes Sociais: Focados na conexão interpessoal e compartilhamento de mídia.
+
+Blogs: Publicações cronológicas de artigos e opiniões.
+
+Sites da Imprensa: Versões digitais de jornais e revistas com atualizações em tempo real.
+
+Sites Bancários: Plataformas de serviços financeiros com camadas reforçadas de segurança.
+
+E-commerce: Lojas virtuais voltadas para a compra e venda de produtos/serviços.
+
+Aplicativos Web (Web Apps / SaaS): Softwares executados diretamente no navegador sem necessidade de instalação local (ex: Google Docs, Canva).
+
+Sites Multimídia: Focados no consumo de áudio e vídeo em fluxo contínuo ou sob demanda (ex: YouTube, Spotify).
+
+Código / Exemplos Práticos
+Comparativo de Estruturas: XML vs. JSON
+
+Para entender como dados são transmitidos entre cliente e servidor, vejamos como a mesma informação de um aluno é representada nos dois formatos principais:
+
+Exemplo em XML
+
+<?xml version="1.0" encoding="UTF-8"?>
+<aluno>
+    <id>101</id>
+    <nome>Bruss Loza</nome>
+    <curso>Técnico em Informática</curso>
+    <ativo>true</ativo>
+</aluno>
+Exemplo em JSON
+
+{
+  "id": 101,
+  "nome": "Bruss Loza",
+  "curso": "Técnico em Informática",
+  "ativo": true
+}
+Desmontando o Código e Estruturas
+
+Desmontando a Estrutura de uma URL
+
+Uma URL completa pode ser fatiada nas seguintes partes:
+
+[https://www.exemplo.com.br:443/cursos/aula?id=15#conceito](https://www.exemplo.com.br:443/cursos/aula?id=15#conceito)
+
+https:// → Protocolo: Especifica a regra de comunicação segura (HTTP + SSL/TLS).
+[www.exemplo.com](https://www.exemplo.com).br → Domínio / Host: O nome amigável mapeado para o endereço IP do servidor.
+:443 → Porta: A porta de comunicação do servidor (443 é a padrão do HTTPS; 80 é a do HTTP).
+/cursos/aula → Caminho (Path): Indica o recurso ou pasta dentro do servidor.
+?id=15 → Query String: Parâmetros de busca passados no formato chave=valor.
+#conceito → Âncora (Fragment): Aponta para uma seção específica dentro da própria página.
+Análise Comparativa XML vs. JSON
+
+No XML, cada dado precisa de uma tag de abertura (<nome>) e uma de fechamento (</nome>), gerando um arquivo mais pesado e verboso.
+
+No JSON, a estrutura utiliza chaves {} e o padrão "chave": valor, resultando em uma sintaxe mais limpa, mais rápida para transmitir na rede e fácil de ler via JavaScript.
+
+Passo a Passo: O Ciclo de uma Requisição Web (Cliente-Servidor)
+
+Quando um usuário digita uma URL no navegador e pressiona Enter, ocorre a seguinte sequência de eventos:
+
+Resolução de Nome (DNS): O navegador solicita ao servidor DNS que converta o endereço de texto (ex: google.com) no endereço IP numérico do servidor de hospedagem.
+
+Estabelecimento de Conexão (TCP/IP): É aberta uma conexão de rede segura entre o computador do cliente e o servidor de destino através do protocolo TCP/IP.
+
+Requisição HTTP (Request): O navegador envia uma mensagem HTTP (método GET) solicitando o arquivo da página.
+
+Processamento no Servidor: O servidor processa a solicitação, busca os arquivos no banco de dados ou no disco local e prepara a resposta.
+
+Resposta HTTP (Response): O servidor envia uma resposta com um código de status (ex: 200 OK) acompanhada dos dados em HTML, CSS, JavaScript ou JSON.
+
+Renderização no Navegador: O navegador lê os arquivos recebidos, interpreta a marcação HTML, aplica os estilos CSS, executa os scripts JavaScript e desenha a interface na tela para o usuário.
+
+Tabelas Comparativas
+Tabela 1: Evolução da Web
+
+Era	Nome Principal	Foco da Interação	Tecnologias Chave
+Web 1.0
+Web da Informação	Leitura (Estática)	HTML Simples, Portais estáticos
+Web 2.0
+Web Colaborativa	Leitura e Escrita (Interativa)	AJAX, Redes Sociais, Blogs, SaaS
+Web 3.0
+Web Semântica / Inteligente	Dados interligados e IA	Machine Learning, Ontologias, Blockchain, IoT
+Tabela 2: Formatos de Troca de Dados (XML vs. JSON)
+
+Característica	XML	JSON
+Sintaxe	Baseada em tags (<tag>)	Baseada em pares chave: valor
+Peso / Tamanho	Mais pesado / verboso	Mais leve e compacto
+Leitura por JS	Requer parse de documento DOM	Nativo do JavaScript (JSON.parse())
+Uso Principal	Sistemas legados, SOAP, NFe	APIs RESTful modernas, aplicações Web/Mobile
+Tabela 3: SOAP vs. REST
+
+Padrão	Tipo	Formato de Dados	Complexidade
+SOAP
+Protocolo rígido	Apenas XML	Alta (Contratos estritos)
+REST
+Estilo Arquitetural	JSON (preferencial), XML, HTML, Texto	Baixa / Flexível
+Erros Comuns e Cuidados
+Classificar HTML como linguagem de programação:
+❌ Incorreto: "Criei uma lógica de decisão usando a linguagem de programação HTML."
+✔️ Correto: "Estruturei os elementos do meu formulário utilizando a linguagem de marcação HTML."
+Confundir a criação da Internet com a criação da Web:
+❌ Incorreto: "Tim Berners-Lee criou a Internet durante a Guerra Fria em 1969."
+✔️ Correto: "A Internet (infraestrutura física) nasceu com a ARPANET no contexto da Guerra Fria (1969). Tim Berners-Lee criou a World Wide Web (WWW) em 1989 no CERN."
+Tratar URI e URL como conceitos opostos:
+Entendi que toda URL é uma URI, pois a URL é apenas uma das formas existentes de identificar um recurso através de sua localização na rede.
+Aprofundamento e Boas Práticas (Conteúdo Complementar)
+O Papel dos Servidores Web e Portas Padrão
+
+Quando desenvolvemos páginas web, elas são armazenadas em Servidores Web (como Apache, Nginx ou IIS). Esses servidores rodam processos escutando portas de rede específicas:
+
+Porta 80: Utilizada para tráfego web não criptografado via HTTP.
+Porta 443: Utilizada para tráfego seguro criptografado via HTTPS (HTTP + TLS/SSL).
+O Padrão W3C
+
+Seguir as diretrizes do W3C garante que o código HTML/CSS funcione de forma consistente em diferentes navegadores (Chrome, Firefox, Safari, Edge) e atenda a critérios universais de Acessibilidade Web (WCAG).
+
+Guia Rápido de Memorização
+TCP/IP: Base de conexões de toda a Internet (TCP fatiou, IP endereçou).
+
+Tríade do Tim Berners-Lee: HTTP (transporte), HTML (estrutura), WWW (o ecossistema).
+
+Web 1.0: Leitura (Estática).
+
+Web 2.0: Leitura + Escrita (Social/Interativa).
+
+Web 3.0: Semântica + Dados Conectados + IA.
+
+API: A ponte de comunicação entre sistemas.
+
+JSON: Formato leve de dados em pares chave: valor.
+
+URL: O endereço completo de localização de um recurso na Web.
+
+Resumo Relâmpago
+
+A Internet é a infraestrutura física de rede global; a Web (WWW) é o sistema de hipertextos que trafega sobre ela.
+
+A ARPANET surgiu em 1969 na Guerra Fria e originou a Internet com o protocolo TCP/IP criado por Bob Kahn e Vint Cerf.
+
+Tim Berners-Lee criou a World Wide Web (WWW), o protocolo HTTP, a linguagem HTML e o primeiro navegador em 1989-1990.
+
+HTML é uma linguagem de marcação estrutural de texto e conteúdo, não uma linguagem de programação.
+
+A Web 1.0 era focada apenas em leitura com páginas estáticas em HTML.
+
+A Web 2.0 trouxe dinamismo, redes sociais e produção colaborativa de conteúdo pelos próprios usuários.
+
+A Web 3.0 integra Web Semântica, inteligência artificial, dados estruturados e descentralização.
+
+APIs permitem a comunicação entre aplicações diferentes, utilizando formatos de troca de dados como XML e JSON.
+
+Uma URL é o localizador exato de um recurso na web, composto por protocolo, domínio, porta, caminho e parâmetros.
+
+REST é o estilo arquitetural moderno mais usado em web services, preferindo conexões HTTP e payloads leves em JSON.
