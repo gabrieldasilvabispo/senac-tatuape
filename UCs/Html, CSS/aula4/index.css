@@ -1,0 +1,41 @@
+/* Aplicar a mesma fonte todos os elementos da pagina*/
+*{
+    font-family: sans-serif;
+}
+
+h3{
+    color: #1a6868;
+}
+
+li::marker{
+    color: #1a6868;
+    font-weight: bold;
+    font-style: italic;
+}
+
+li{
+    line-height: 30px;
+}
+input[type="checkbox"]:checked + p{
+    text-decoration: line-through;
+    /*Quando um checkbox dentro de um <li> estiver marcado
+    :checked, o peragrafo <p> logo apos ele <p>
+    ficara com um risco no texto (efeito de "tarefa concluida"*/
+
+}
+li > input[type="checkbox"], li > p{
+    display: inline;
+    /*Faz com que o checkbox e o texto fiquem na mesma linha,
+    em vez de um abalo do outro*/
+
+}
+
+li > p{
+    color:black !important;
+    /*define que os paragrafos dentro dos li terão a cor preta,
+    o !importante força essa regra a prevalecer sobre as outras*/
+}
+
+h1 {
+    color: #1a6868;
+}
