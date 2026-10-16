@@ -1,0 +1,33 @@
+h1{
+  display: flex;
+  
+}
+h2{
+    background-color: rgb(188, 147, 98);
+    text-align: center;
+}
+ul > li{
+    font-weight: bold;
+    font-family: sans-serif;
+   
+}
+ol >li{
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+main{
+    font-weight: bold;
+    font-family: sans-serif;
+    
+    
+}
+h3{
+    background-color: rgb(188, 147, 98);
+    text-align: center;
+   
+}
+*{
+    background-color: rgb(210, 209, 209);
+    
+}
