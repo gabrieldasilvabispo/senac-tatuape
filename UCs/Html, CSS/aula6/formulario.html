@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="=width=devide=width, initial-scale=1.0">
+        <!--
+        name="viewport": indica que a tag controla a "janela de visulização"
+        
+        content="=width=devide=width": faz com que a largura da pagina seja igual a largura real
+        da tela do dispositivo.
+        por exemplo, se o celular do usuario tiver 390px de largura o site sera exibido exatamente nessa medida.
+        
+        initial-scale=1.0": Define o nivel de zoom inicial como 100% para que o navegador não aplique o zoom automatico 
+        ao carregar a pagina.
+        -->
+        <title>Formulário</title>
+        <link rel="stylesheet" href="form.css">
+    </head>
+    <body>
+
+
+        <form>
+            <h1>Doação/Adoção de pets</h1>
+            
+            <div>
+                <label for="text">Nome do doador/tutor</label>
+                <input type="text" id="text" name="text" placeholder="preencha com o nome completo " required> 
+            </div>
+            <div>
+                <label for="pwd">Senha de acesso</label>
+                <input type="password" id="pwd" name="pwd" placeholder="Senha com 6 digitos" required>  
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Digite o Email valido" required>
+            </div>
+            <div>
+                <label for="Idade">Idade do Pet(meses)</label>
+                <input type="number" name="idade" id="idade" min="0" max="48" step="6" value="0"> 
+            </div>
+            <div>
+                <label for="vacina">Vacinas</label>
+                <input type="checkbox" value="v8" name="vacina" checked>v8
+                <input type="checkbox" value="v10" name="vacina" checked>v10
+                <input type="checkbox" value="giardia" name="vacina" checked>giardia
+                <input type="checkbox" value="gripe" name="vacina" checked>gripe
+                <input type="checkbox" value="anti-rabica" name="vacina" checked>anti-rabica
+            </div>
+            <div>
+                <label for="castracao">Castrado</label>
+                <input type="radio" value="sim" name="castracao" checked>Sim
+                <input type="radio" value="nao" name="castracao" checked>Não
+            </div>
+            <div>
+                <label for="tipo">Pet</label>
+                <select id="tipo" name="doacao">
+                    <option value="doacao">Doação</option>
+                    <option value="adocao">Adoção</option>
+                </select>
+            </div>
+            <div>
+                <label for="especie">Espécie</label>
+                <select id="especie" name="especie" multiple size="4">
+                    <option value="nome" selected>-- Selecione um ou mais --</option>
+                    <optgroup label="Mamiferos">
+                        <option value="cao">Cão</option>
+                        <option value="gato">Gato</option>
+                        <option value="hamster" disabled>Hamster</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div>
+                <label for="observacoes">Observações</label>
+                <textarea name="observacoes"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Enviar Formulario">
+                <input type="reset" value="Limpar Formulario">
+            </div>
+            
+        </form>
+    </body>
+</html>
