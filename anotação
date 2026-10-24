@@ -1,300 +1,382 @@
-Formulários em HTML5: Campos de Entrada, Seleção, Validação e Estilização com Flexbox
+Integrando Java com MySQL via JDBC e Indicador de Status Visual no Java Swing (Projeto BL-PDV)
 Visão Geral
 
-Nesta aula, aprendi a construir e estilizar formulários interativos em HTML5, compreendendo a estrutura necessária para coletar dados do usuário de maneira acessível e organizada.
+Nesta aula, dei um dos passos mais importantes no desenvolvimento do sistema BL-PDV: integrei a aplicação Java Swing a um banco de dados relacional MySQL através do JDBC (Java Database Connectivity).
 
-Entendi que os formulários são a principal porta de entrada para a interação do usuário com o sistema (cadastros, logins, pesquisas e envios de informações). Além disso, explorei o funcionamento da meta tag viewport para garantir que a página seja responsiva em dispositivos móveis, e utilizei o CSS Flexbox para alinhar rótulos (<label>) e campos de entrada (<input>, <select>, <textarea>) de forma limpa e padronizada.
+Para realizar essa ponte entre o código Java e o banco de dados, utilizei o driver oficial MySQL Connector/J 8.4.0, adicionando-o à pasta lib e ao Build Path do projeto.
 
+Em seguida:
+
+criei o banco de dados blpdv e a tabela fornecedores no MySQL Workbench;
+desenvolvi a classe Database.java com métodos para estabelecer a conexão e realizar o teste de disponibilidade (status) da base;
+construí visualmente no WindowBuilder um rodapé dinâmico no Main.java com ícones, labels e um indicador colorido (•) que altera sua cor para verde (conectado) ou vermelho (desconectado) em tempo real ao iniciar o sistema;
+iniciei a montagem do cabeçalho adicionando os componentes visuais para data (lblCalendario e lblData).
 Entendendo o Conceito
 
-Formulário HTML e a Meta Viewport
-Formulário HTML (<form>): É um contêiner que agrupa diferentes tipos de controles visuais (caixas de texto, botões de opção, listas suspensas) com o objetivo de capturar dados digitados pelo usuário e prepará-los para envio.
-Meta Tag Viewport: É uma instrução inserida no cabeçalho <head> da página que ajusta a área de exibição visível do site (viewport) ao tamanho real da tela do dispositivo utilizado (smartphone, tablet ou desktop).
-Analogia: Pense no formulário como uma ficha de cadastro impressa em papel. Cada <label> é a pergunta impressa, o <input> é a linha em branco para preenchimento, e a meta viewport garante que essa folha de papel seja ajustada perfeitamente ao tamanho da prancheta (a tela do celular) sem precisar dobrá-la para conseguir ler.
-┌─────────────────────────────────────────────────────────┐
-│              DOAÇÃO / ADOÇÃO DE PETS                    │
-├─────────────────────────────────────────────────────────┤
-│  Nome do doador:   [ Preencha com o nome completo     ] │  <- <input type="text">
-│  Senha de acesso:  [ ••••••                           ] │  <- <input type="password">
-│  E-mail:           [ Digite um e-mail válido          ] │  <- <input type="email">
-│  Idade do Pet:     [ 12 ] meses                         │  <- <input type="number">
-│  Vacinas:          [x] V8  [x] V10  [ ] Antirrábica     │  <- <input type="checkbox">
-│  Castrado:         (•) Sim  ( ) Não                     │  <- <input type="radio">
-│  Espécie:          [ Gato                           ▼ ] │  <- <select>
-│                                                         │
-│        [ ENVIAR FORMULÁRIO ]   [ LIMPAR FORMULÁRIO ]    │  <- <input type="submit/reset">
-└─────────────────────────────────────────────────────────┘
+JDBC e funcionamento da conexão com MySQL
+O JDBC é a especificação padrão da linguagem Java para execução de instruções SQL e integração com Banco de Dados Relacionais. Como o Java é neutro e não conhece as particularidades de cada banco por padrão, precisamos de um Driver JDBC específico (fornecido pelo fabricante do banco, no nosso caso o mysql-connector-j-8.4.0.jar).
+
+Analogia da Tomada e do Adaptador:
+
+Imagine que o seu código Java é um aparelho eletrônico fabricado no padrão brasileiro e o MySQL é uma tomada da parede do modelo europeu. O JDBC é o padrão elétrico interno do seu aparelho, e o arquivo .jar do driver funciona como o adaptador físico perfeito que permite ligar o aparelho na tomada sem queimá-lo.
+
+O Indicador Visual de Status da Conexão
+Em sistemas comerciais de Ponto de Venda (PDV), o operador precisa saber instantaneamente se o sistema está comunicando com o banco de dados antes de iniciar uma venda.
+
+Se o banco estiver operacional, o método testarConexao() abre uma sessão rápida, fecha em seguida, retorna true e a interface altera a cor do componente gráfico para verde exibindo "MySQL Conectado". Caso o serviço do MySQL esteja desligado, a tentativa gera uma exceção, o método retorna false e a interface exibe "MySQL Desconectado" com o ponto em vermelho.
 
 Conceitos Fundamentais
 
-A Meta Tag Viewport
-<meta name="viewport" content="width=device-width, initial-scale=1.0">:
-name="viewport": Avisa ao navegador que a regra se aplica à janela de visualização.
-width=device-width: Define que a largura do site deve se adaptar exatamente à largura física da tela do aparelho.
-initial-scale=1.0: Define o nível de zoom inicial como 100%, evitando renderizações encolhidas.
-Estrutura do Formulário e Rótulos Acessíveis
-<form>: Tag pai que envolve todos os campos.
-<label for="ID_DO_CAMPO">: Rotula um campo de entrada. O atributo for deve corresponder exatamente ao id do campo correspondente. Isso melhora a acessibilidade (leitores de tela) e permite que o usuário clique no texto do rótulo para ativar o campo.
-Tipos de Campos de Entrada (<input>)
-type="text": Campo simples para texto de linha única.
-type="password": Mascara os caracteres digitados por questões de privacidade.
-type="email": Exige formato de e-mail válido (usuario@dominio.com) no momento do envio.
-type="number": Aceita apenas números. Permite os atributos min (valor mínimo), max (valor máximo), step (intervalo de incremento) e value (valor padrão).
-type="checkbox": Caixa de seleção de múltipla escolha (o usuário pode marcar zero, um ou vários itens).
-type="radio": Botão de escolha única (exclusiva). Todos os botões de rádio do mesmo grupo devem possuir o mesmo atributo name.
-type="submit": Botão que envia os dados do formulário.
-type="reset": Botão que limpa todos os campos, retornando-os aos valores iniciais.
-Elementos Seletores e Caixas de Texto
-<select> e <option>: Cria uma caixa de seleção suspensa (dropdown).
+As 4 Classes e Interfaces Principais do JDBC
+DriverManager: Classe utilitária que gerencia os drivers instalados e tenta estabelecer a conexão com a URL informada.
+Connection: Interface que representa a sessão ativa de comunicação entre o Java e o banco de dados.
+Statement / PreparedStatement: Interfaces para enviar e executar comandos SQL (SELECT, INSERT, UPDATE, DELETE).
+ResultSet: Objeto que guarda a tabela de resultados devolvida por uma consulta SELECT.
+URL de Conexão JDBC (url)
+A String de conexão especifica o protocolo, o driver, o host e o nome da base de dados:
 
-Atributo multiple: Permite selecionar mais de uma opção pressionando Ctrl ou Shift.
+jdbc:mysql://localhost/blpdv
 
-Atributo size: Define quantas opções ficam visíveis na tela sem precisar abrir o menu.
-
-<optgroup>: Agrupa opções relacionadas sob um título descritivo dentro da lista.
-
-<textarea>: Caixa de texto de múltiplas linhas para mensagens longas ou observações.
+jdbc:mysql://: Protocolo de comunicação.
+localhost: Endereço do servidor onde o MySQL está rodando (máquina local).
+blpdv: Nome exato da base de dados criada no MySQL Workbench.
+Absolute Layout no WindowBuilder (setLayout(null))
+Para desenhar componentes no rodapé e no cabeçalho com posições exatas pixel a pixel, alteramos o layout do contentPane para Absolute Layout. Isso nos permite definir manualmente as coordenadas 
+(
+X
+,
+Y
+)
+ e o tamanho 
+(
+largura
+,
+altura
+)
+ de cada JLabel via método setBounds().
 
 Código / Exemplos Práticos
-Abaixo estão os arquivos do projeto com a sintaxe corrigida, validados e prontos para execução na pasta formulario.
+Arquivo 1: Script de Criação da Base no MySQL Workbench (script_blpdv.sql)
 
-Arquivo 1: formulario.html
+-- Criação do Banco de Dados com suporte a caracteres acentuados (UTF-8)
+CREATE DATABASE blpdv
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Doação e Adoção de Pets</title>
-    <link rel="stylesheet" href="form.css">
-</head>
-<body>
+USE blpdv;
 
-    <form>
-        <h1>Doação/Adoção de Pets</h1>
+-- Criação da tabela de Fornecedores
+CREATE TABLE fornecedores (
+    idFornecedor INT AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    fone VARCHAR(20) NOT NULL,
+    email VARCHAR(50),
+    site VARCHAR(100),
+    PRIMARY KEY (idFornecedor)
+) DEFAULT CHARSET = utf8;
+Arquivo 2: Classe de Conexão e Teste de Status (Database.java)
 
-        <div>
-            <label for="nome">Nome do doador/tutor</label>
-            <input type="text" id="nome" name="nome" placeholder="Preencha com o nome completo" required>
-        </div>
+package database;
 
-        <div>
-            <label for="pwd">Senha de acesso</label>
-            <input type="password" id="pwd" name="pwd" placeholder="Senha com 6 dígitos" required>
-        </div>
+import java.sql.Connection;
+import java.sql.DriverManager;
 
-        <div>
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="Digite um e-mail válido" required>
-        </div>
+/**
+ * Classe responsável pelo gerenciamento da conexão com o banco de dados MySQL.
+ * 
+ * @author Bruss Loza
+ */
+public class Database {
 
-        <div>
-            <label for="idade">Idade do Pet (Em meses)</label>
-            <input type="number" id="idade" name="idade" min="0" max="54" step="6" value="0">
-        </div>
+    // Informações de acesso ao banco de dados MySQL
+    private String driver = "com.mysql.cj.jdbc.Driver";
+    private String url = "jdbc:mysql://localhost/blpdv";
+    private String user = "root";
+    private String password = ""; // Senha padrão do XAMPP/Workbench é vazia
 
-        <div>
-            <label>Vacinas:</label>
-            <label><input type="checkbox" name="vacina" value="v8" checked> V8</label>
-            <label><input type="checkbox" name="vacina" value="v10" checked> V10</label>
-            <label><input type="checkbox" name="vacina" value="giardia" checked> Giárdia</label>
-            <label><input type="checkbox" name="vacina" value="gripe" checked> Gripe</label>
-            <label><input type="checkbox" name="vacina" value="anti-rabica" checked> Antirrábica</label>
-        </div>
+    /**
+     * Estabelece e retorna uma conexão ativa com o banco de dados.
+     * 
+     * @return Objeto Connection ou null em caso de falha
+     */
+    public Connection conectar() {
+        try {
+            // Carrega dinamicamente a classe do Driver JDBC do MySQL na memória
+            Class.forName(driver);
+            // Solicita a conexão ao DriverManager
+            return DriverManager.getConnection(url, user, password);
+            
+        } catch (Exception e) {
+            System.err.println("Erro ao conectar ao banco: " + e.getMessage());
+            return null;
+        }
+    }
 
-        <div>
-            <label>Castrado:</label>
-            <label><input type="radio" name="castracao" value="sim" checked> Sim</label>
-            <label><input type="radio" name="castracao" value="nao"> Não</label>
-        </div>
-
-        <div>
-            <label for="tipo">Tipo de solicitação</label>
-            <select id="tipo" name="tipo">
-                <option value="doacao">Doação</option>
-                <option value="adocao">Adoção</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="especie">Espécie</label>
-            <select id="especie" name="especie" multiple size="4">
-                <option value="" disabled selected>-- Selecione um ou mais --</option>
-                <optgroup label="Mamíferos">
-                    <option value="cao">Cão</option>
-                    <option value="gato">Gato</option>
-                    <option value="hamster" disabled>Hamster (Indisponível)</option>
-                </optgroup>
-            </select>
-        </div>
-
-        <div>
-            <label for="observacoes">Observações</label>
-            <textarea id="observacoes" name="observacoes" rows="4" placeholder="Escreva aqui detalhes sobre o pet..."></textarea>
-        </div>
-
-        <div class="botoes">
-            <input type="submit" value="Enviar Formulário">
-            <input type="reset" value="Limpar Formulário">
-        </div>
-    </form>
-
-</body>
-</html>
-Arquivo 2: form.css
-
-/* Seletor Universal - aplica a família de fontes para todos os elementos */
-* {
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
+    /**
+     * Método utilitário para testar o status da conexão sem manter o canal aberto.
+     * 
+     * @return true se o banco estiver online; false caso contrário.
+     */
+    public boolean testarConexao() {
+        Connection con = conectar();
+        
+        if (con == null) {
+            return false;
+        }
+        
+        try {
+            con.close(); // Fecha a conexão de teste imediatamente para não vazar recursos
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro ao fechar conexão de teste: " + e.getMessage());
+            return false;
+        }
+    }
 }
+Arquivo 3: Interface Principal com Status Visual (Main.java)
 
-/* Configuração de largura e centralização do formulário */
-form {
-    width: 90%;          /* O formulário ocupa 90% da largura em telas pequenas */
-    max-width: 500px;    /* Define a largura máxima em telas grandes */
-    margin: 20px auto;   /* Centraliza o formulário horizontalmente na tela */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
+package view;
 
-/* Estrutura das linhas do formulário usando Flexbox */
-div {
-    margin-bottom: 20px;            /* Espaço abaixo de cada grupo de campo */
-    display: flex;                   /* Ativa o Flexbox para alinhar label e input lado a lado */
-    justify-content: space-between;  /* Distribui os elementos nas extremidades */
-    align-items: center;             /* Alinha verticalmente pelo centro */
-    gap: 10px;                       /* Espaçamento interno entre rótulo e campo */
-}
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
-/* Padronização do tamanho de fonte de todos os controles */
-label, input, select, textarea, button {
-    font-size: 14px;
-    line-height: 1.5;
-}
+import com.formdev.flatlaf.FlatLightLaf;
+import database.Database;
 
-/* Estilização dos Rótulos (Labels) */
-label {
-    text-align: right;   /* Alinha o texto do rótulo à direita */
-    width: 30%;          /* O rótulo ocupa 30% da largura da linha */
-    margin-right: 2%;    /* Espaço de margem entre o rótulo e o campo */
-}
+/**
+ * Janela Principal da Aplicação BL-PDV.
+ */
+public class Main extends JFrame {
 
-/* Os campos de entrada crescem para ocupar o restante da linha */
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-select, 
-textarea {
-    flex: 1;             /* Ocupa todo o espaço restante disponível no flex container */
-    padding: 6px;
-}
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
 
-/* Ajuste específico para a linha de botões no final do formulário */
-div.botoes {
-    justify-content: center;
-    gap: 15px;
-}
+    // Instanciação do objeto da camada de banco de dados
+    private Database db = new Database();
 
-input[type="submit"],
-input[type="reset"] {
-    cursor: pointer;
-    padding: 8px 16px;
+    /**
+     * Ponto de entrada do programa.
+     */
+    public static void main(String[] args) {
+        // Aplica o visual moderno do Swing via FlatLaf
+        FlatLightLaf.setup();
+
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Main frame = new Main();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Construtor do Frame Principal.
+     */
+    public Main() {
+        // Configurações Globais da Janela Principal
+        setTitle("BL-PDV");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/img/blpvd.png")));
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 800, 600);
+
+        // Painel de Conteúdo com Layout Absoluto
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        // --- RODAPÉ: COMPONENTES DE STATUS DO BANCO DE DADOS ---
+
+        // Ícone do Banco de Dados (16x16)
+        JLabel lblDataBase = new JLabel("");
+        lblDataBase.setIcon(new ImageIcon(Main.class.getResource("/img/banco.png")));
+        lblDataBase.setBounds(10, 530, 16, 23);
+        contentPane.add(lblDataBase);
+
+        // Label de Texto para o Status da Conexão
+        JLabel lblMysql = new JLabel("");
+        lblMysql.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblMysql.setBounds(32, 533, 130, 18);
+        contentPane.add(lblMysql);
+
+        // Ponto Indicador Colorido (Status em Verde ou Vermelho)
+        JLabel lblStatus = new JLabel("•");
+        lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
+        lblStatus.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblStatus.setBounds(165, 533, 15, 18);
+        contentPane.add(lblStatus);
+
+        // --- CABEÇALHO: COMPONENTES DE DATA E CALENDÁRIO ---
+
+        // Ícone do Calendário (24x24)
+        JLabel lblCalendario = new JLabel("");
+        lblCalendario.setIcon(new ImageIcon(Main.class.getResource("/img/calendario.png")));
+        lblCalendario.setBounds(620, 15, 24, 24);
+        contentPane.add(lblCalendario);
+
+        // Label de Texto para Exibição da Data Formatada
+        JLabel lblData = new JLabel("");
+        lblData.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblData.setBounds(650, 18, 120, 18);
+        contentPane.add(lblData);
+
+        // --- TESTE LÓGICO DE CONEXÃO AO INICIALIZAR A JANELA ---
+        if (db.testarConexao()) {
+            System.out.println("Banco de Dados Conectado com Sucesso!");
+            lblMysql.setText("MySQL Conectado");
+            lblStatus.setForeground(new Color(0, 150, 0)); // Verde
+        } else {
+            System.err.println("Erro ao Conectar com o Banco de Dados!");
+            lblMysql.setText("MySQL Desconectado");
+            lblStatus.setForeground(Color.RED); // Vermelho
+        }
+    }
 }
 Desmontando o Código
 
-Análise do formulario.html
+Desmontando a Classe Database.java
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">: Corrige a renderização em telas de celular.
+Class.forName(driver);
+return DriverManager.getConnection(url, user, password);
+Class.forName("com.mysql.cj.jdbc.Driver"): Força o Java a carregar na memória a classe do driver MySQL vindo do arquivo .jar.
+DriverManager.getConnection(...): Solicita ao gerenciador do Java que abra o canal TCP com o MySQL no endereço jdbc:mysql://localhost/blpdv. Se a porta, usuário ou senha estiverem errados, o método dispara uma exceção SQLException.
+Desmontando o Teste de Conexão Segura (testarConexao())
 
-<input type="number" min="0" max="54" step="6" value="0">:
+public boolean testarConexao() {
+    Connection con = conectar();
+    if (con == null) return false;
+    try {
+        con.close();
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+}
+Connection con = conectar();: Chama o método principal de conexão.
+if (con == null): Se a conexão falhou, retorna false imediatamente.
+con.close();: Essencial. Fecha a conexão de teste imediatamente após confirmar que o banco está vivo. Se não fecharmos a conexão de teste, o banco esgotará o número máximo de conexões permitidas (Connection Leak).
+Desmontando a Troca Dinâmica de Cores no Swing
 
-min="0": Não permite números negativos.
+if (db.testarConexao()) {
+    lblMysql.setText("MySQL Conectado");
+    lblStatus.setForeground(new Color(0, 150, 0));
+} else {
+    lblMysql.setText("MySQL Desconectado");
+    lblStatus.setForeground(Color.RED);
+}
+lblMysql.setText(...): Altera a legenda textual dinamicamente durante a execução.
+lblStatus.setForeground(...): Altera a cor de primeiro plano do caractere •. Usamos new Color(0, 150, 0) para um verde escuro legível ou Color.RED para falhas.
+Passo a Passo
 
-max="54": Limita a idade máxima a 54 meses (4 anos e meio).
+Passo a Passo 1: Download e Importação do Driver MySQL no Eclipse
 
-step="6": Ao clicar nas setinhas do campo, o valor aumenta ou diminui de 6 em 6 meses.
+Acesse o site oficial do MySQL e navegue até a opção Connector/J.
+Selecione a versão 8.4.0, plataforma Independent, e baixe o arquivo .zip.
+Extraia o pacote e localize o arquivo compilado mysql-connector-j-8.4.0.jar.
+No Eclipse, abra a estrutura do projeto blpvd.
+Arraste o arquivo mysql-connector-j-8.4.0.jar para dentro da pasta lib.
+Clique com o botão direito no arquivo .jar ➔ Build Path ➔ Add to Build Path.
+Passo a Passo 2: Construção da Base no MySQL Workbench
 
-<input type="radio" name="castracao" value="sim">: Ter o mesmo atributo name="castracao" garante que apenas uma das opções seja marcada por vez.
+Abra o MySQL Workbench e conecte-se à sua instância local (Local instance 3306).
+Abra uma nova aba de Query e execute o script SQL:
+CREATE DATABASE blpdv DEFAULT CHARACTER SET utf8;
+USE blpdv;
+CREATE TABLE fornecedores (...);
+Pressione Ctrl + Shift + Enter para rodar todas as instruções e confirme a criação no painel Schemas.
+Passo a Passo 3: Desenhando o Rodapé de Status no WindowBuilder
 
-<optgroup label="Mamíferos">: Organiza as opções em categorias dentro do menu suspenso <select>.
-
-disabled na <option value="hamster">: Desabilita visualmente a opção, impedindo que o usuário a selecione.
-
-Análise do form.css
-
-form { width: 90%; max-width: 500px; margin: 20px auto; }: Técnica clássica de layout responsivo. Em telas menores que 500px, o formulário se ajusta dinamicamente a 90% da tela; em monitores grandes, ele para de crescer ao atingir 500px e fica perfeitamente centralizado.
-div { display: flex; justify-content: space-between; align-items: center; }: Transforma cada grupo de campos em um container flexível horizontal, onde o rótulo fica de um lado e o campo do outro.
-input, select, textarea { flex: 1; }: A regra flex: 1 instrui o navegador a fazer os campos de texto expandirem até preencher todo o espaço não ocupado pelo rótulo.
-Passo a Passo: Criando o Formulário no VS Code
-
-Criar a pasta e abrir no editor:
-Crie uma pasta chamada formulario no computador e abra-a no Visual Studio Code (File > Open Folder).
-Criar os arquivos:
-No painel esquerdo do VS Code, crie os arquivos formulario.html e form.css.
-**Estruturar a tag <head>**:
-Adicione a declaração <!DOCTYPE html>, especifique a linguagem <html lang="pt-BR"> e insira a meta viewport e a tag <link rel="stylesheet" href="form.css">.
-Adicionar os grupos de campos:
-Para cada campo de entrada, crie uma <div> contendo a tag <label> e a tag de entrada correspondente (<input>, <select> ou <textarea>).
-Estilizar e testar:
-Abra o arquivo formulario.html no navegador e teste as validações nativas (como tentar enviar um e-mail sem o @ ou tentar enviar o formulário sem preencher os campos required).
+No Eclipse, abra a classe Main.java e alterne para a aba Design.
+Clique no contentPane, vá na aba Properties, selecione Layout e mude para Absolute Layout (ou null).
+Ícone do Banco:
+Na paleta de componentes, selecione JLabel, clique no rodapé esquerdo da tela.
+Na propriedade variable, renomeie para lblDataBase.
+Na propriedade icon, selecione a imagem banco.png (16x16) da pasta img. Apague o texto do label.
+Legenda do Banco:
+Insira uma nova JLabel ao lado do ícone.
+Na propriedade variable, renomeie para lblMysql. Deixe o texto vazio no design.
+Ponto de Status:
+Insira uma terceira JLabel ao lado da legenda.
+Na propriedade variable, renomeie para lblStatus.
+Na propriedade text, digite o caractere • (Alt + 7 do teclado numérico).
+Altere a fonte para Tahoma, Bold, 20 e o alinhamento horizontal para Center.
+Salvamento:
+Salve o arquivo (Ctrl + S) e alterne para a aba Source para validar as condicionais.
 Tabelas Comparativas
-Tabela 1: Tipos de Inputs e suas Aplicações
+Resumo das Ferramentas da Arquitetura JDBC
 
-Tipo (type)	Descrição e Comportamento	Validação Nativa do Navegador
-text	Entrada de texto simples de linha única.	Nenhuma (aceita qualquer caractere).
-password	Mascara os caracteres com pontos/asteriscos.	Oculta a digitação visualmente.
-email	Entrada voltada para endereços de e-mail.	Valida se existe @ e um domínio válido.
-number	Aceita apenas valores numéricos.	Impede digitação de letras (exceto 'e' científico).
-checkbox	Caixa de seleção individual ou múltipla.	Pode usar checked para vir marcada por padrão.
-radio	Botão de seleção exclusiva em um grupo.	Apenas 1 botão do mesmo name pode ser marcado.
-submit	Botão de submissão dos dados do formulário.	Dispara o evento de envio do <form>.
-reset	Botão de restauração do formulário.	Reseta todos os campos para seus valores padrão.
-Tabela 2: Checkbox vs. Radio Button
+Componente JDBC	Função na Aplicação	Arquivo / Classe Utilizada
+Driver JDBC	Biblioteca externa que traduz o código Java para o MySQL.	mysql-connector-j-8.4.0.jar
+Driver Class Name	Nome da classe carregada via Class.forName().	com.mysql.cj.jdbc.Driver
+Connection String (URL)	Endereço de rede e porta de escuta da base de dados.	jdbc:mysql://localhost/blpdv
+Connection Object	Objeto da sessão ativa usado para enviar queries ao MySQL.	java.sql.Connection
+Estados do Indicador de Conexão na Interface Swing
 
-Característica	Checkbox (type="checkbox")	Radio Button (type="radio")
-Tipo de Escolha	Múltipla escolha (pode selecionar vários).	Escolha única (exclusiva).
-Agrupamento	Opcional (usado para arrays no backend).	Obrigatório ter o mesmo name em todos os itens.
-Desmarcação	O usuário pode clicar novamente para desmarcar.	Só desmarca se o usuário clicar em outro radio do grupo.
+Condição Lógica	Retorno de testarConexao()	Texto exibido na lblMysql	Cor da lblStatus (•)
+MySQL Rodando (Porta 3306)	true	"MySQL Conectado"	Verde (#009600)
+MySQL Parado / Senha Errada	false	"MySQL Desconectado"	Vermelho (Color.RED)
 Erros Comuns e Cuidados
-Sintaxe incorreta na Meta Tag Viewport:
-❌ Incorreto: content="=width=device=width, initial-scale=1.0" (sinais de igual duplicados e errados).
-✔️ Correto: content="width=device-width, initial-scale=1.0".
-**Marcar múltiplos botões Radio do mesmo grupo com checked**:
-❌ Incorreto: Colocar o atributo checked tanto no rádio "Sim" quanto no rádio "Não".
-✔️ Correto: Apenas UM botão de rádio do mesmo grupo deve possuir o atributo checked.
-Incompatibilidade de id no Rótulo (<label for="...">):
-❌ Incorreto: <label for="text"> com <input id="nome">.
-✔️ Correto: O valor do atributo for do <label> precisa ser exatamente igual ao valor do id do <input>.
-Redundância de declaração no CSS:
-❌ Incorreto: Escrever button { margin: 50%; margin: 0 auto; }. O segundo valor sobrescreve o primeiro completamente.
-Aprofundamento e Boas Práticas (Conteúdo Complementar)
-Os Atributos action e method do <form>
+Erro ClassNotFoundException: com.mysql.cj.jdbc.Driver
 
-Embora não tenham sido detalhados nesta aula visual, a tag <form> aceita dois atributos vitais para a integração com servidores e back-end:
+Ocorre quando tentamos executar o método Class.forName() sem ter adicionado o arquivo .jar do MySQL ao Build Path.
 
-action="processa_dados.php": Define para qual URL ou arquivo os dados do formulário serão enviados quando o usuário clicar no botão Submit.
-method="POST": Define o método HTTP de envio:
-GET: Anexa os dados do formulário diretamente na URL (não recomendado para senhas ou dados sensíveis).
-POST: Envia os dados ocultos no corpo da requisição HTTP (padrão seguro para formulários de cadastro e login).
-Guia Rápido de Memorização
-Meta Viewport: <meta name="viewport" content="width=device-width, initial-scale=1.0">
-Campo Obrigatório: Adicionar o atributo required na tag do <input>.
-Texto de Ajuda Interno: placeholder="Texto instrucional...".
-Grupo de Radio Buttons: Garantir que todos tenham o **mesmo name**.
-Flexbox para Linha de Formulário: div { display: flex; justify-content: space-between; align-items: center; }
-Centralizar Formulário na Tela: form { max-width: 500px; margin: 0 auto; }
+Solução: Verifique se o arquivo mysql-connector-j-8.4.0.jar está dentro da pasta Referenced Libraries do projeto no Eclipse.
+Erro de Texto Cortado na JLabel no Swing (setBounds)
+
+Ao alterar o texto da lblMysql via código de "" para "MySQL Desconectado", se a largura configurada no setBounds() for muito pequena (ex: 26 pixels), a palavra ficará cortada ou invisível na tela.
+
+Solução: Na criação do componente, defina uma largura suficiente (mínimo de 120 pixels) no quarto parâmetro do setBounds(X, Y, Largura, Altura).
+Esqueceu de Criar o Banco no MySQL Workbench
+
+Se a classe Database.java tentar conectar em jdbc:mysql://localhost/blpdv e o banco blpdv ainda não tiver sido criado no MySQL, o Java retornará a exceção Unknown database 'blpdv'.
+
+Solução: Execute o comando CREATE DATABASE blpdv; no MySQL Workbench antes de testar a aplicação Java.
+Conteúdo Complementar e Aprofundamento
+Exibindo a Data Atual dinamicamente no Cabeçalho (lblData)
+
+Para preencher a lblData do cabeçalho que criamos junto com o ícone do calendário, podemos adicionar o código de formatação de data direto dentro do construtor da classe Main.java:
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+// Trecho para incluir dentro do construtor do Main.java:
+LocalDateTime hoje = LocalDateTime.now();
+DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+// Atualiza a Label da data criada no WindowBuilder
+lblData.setText(hoje.format(formatoData));
 Resumo Relâmpago
 
-O elemento <form> é o contêiner HTML usado para agrupar e enviar dados do usuário para um servidor.
-A meta tag viewport configura a escala inicial e garante a adaptação da tela em navegadores de celulares.
-A tag <label for="id"> associa um rótulo de texto a um campo específico, garantindo acessibilidade.
-O atributo required exige que o campo seja preenchido antes que o formulário possa ser enviado.
-<input type="number"> aceita apenas valores numéricos e pode ser controlado com min, max e step.
-Checkboxes (type="checkbox") permitem múltipla escolha, enquanto Radio buttons (type="radio") são de escolha única.
-Botões de rádio do mesmo grupo precisam ter o mesmo atributo name para funcionarem com exclusividade mútua.
-A tag <select> cria menus suspensos e aceita o atributo multiple para seleção de múltiplos itens.
-A tag <textarea> cria um campo de entrada de texto com suporte a múltiplas linhas.
-No CSS, o uso do Flexbox nas divs permite alinhar rótulos e campos lado a lado de forma limpa e responsiva.
+O JDBC possibilita a integração nativa entre aplicações Java e Bancos de Dados Relacionais.
+O driver mysql-connector-j-8.4.0.jar precisa ser adicionado à pasta lib e ao Build Path.
+A URL de conexão jdbc:mysql://localhost/blpdv define a tecnologia, o host e a base de dados.
+O método Class.forName() carrega a classe do driver do MySQL na memória RAM do Java.
+O método DriverManager.getConnection() realiza a autenticação e abre a sessão com o banco.
+A função testarConexao() abre e fecha uma sessão rápida para verificar a disponibilidade do banco.
+O layout do contentPane deve ser configurado como Absolute (null) para posicionamento exato.
+Componentes JLabel com ícones (16x16 e 24x24) são adicionados ao rodapé e cabeçalho da janela.
+A cor e o texto do ponto indicador (•) alternam dinamicamente entre verde (online) e vermelho (offline).
+É indispensável definir uma largura adequada no setBounds() para evitar que mensagens de status sejam cortadas.
+Guia Rápido de Memorização
+Estrutura Base de Conexão JDBC
+
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost/nome_banco", "usuario", "senha");
+Script Básico de Banco MySQL
+
+CREATE DATABASE blpdv DEFAULT CHARACTER SET utf8;
+USE blpdv;
+CREATE TABLE tabela ( id INT AUTO_INCREMENT PRIMARY KEY );
