@@ -1,0 +1,68 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul{
+    list-style: none; /*Removendo os marcadores da lista*/
+}
+
+.main > ul{
+    display: flex;/* Ativa o flexbox = um modelo de layout criado para facilitar o 
+    alinhamento e distribuição dos elementos */
+}
+
+.main > ul > li{
+    width: 20%; /* Definir a largura de um elemento em 20% da largura do conteiner pai.
+                Se o conteiner pai tiver uma largura de 1000px, o elemento filho tera
+                uma largura de 200px e utilizado para criar layouts responsivos*/
+}
+ul > li > ul{
+    display: none;
+}
+
+ul > li:hover{
+    /* hover: é utilizado para aplicar estilos a um elemento
+    quando o cursor do mouse está sobre ele.
+    por exemplo: mudar a cor. */
+    background-color: #d9caf7;
+}
+
+ul > li:hover > ul{
+    display: block;/* Define um elemento como sendo um bloco, isto é, ele vai ocupar toda a largura
+                    disponivel do seu elemento pai*/
+    padding-left: 0%;                
+}
+
+ul > li:hover > ul >li{
+    min-height: 1.5rem;/* Define a altura minima de um elemento, muito usado para manter seções fixas*/
+}
+
+ul > li:hover>ul>li{
+    background-color: #b897f9;
+}
+
+.main{
+    width: 100vw;/* Refere-se a largura de um elemento que ocupa 100% da largura da viweport(janela do navegador)*/
+    height: 100vh;/* Define a altura de um elemento como 100% da do viewport(a area visivel da janela
+                  do navegador) isto é, o elemento passa a ter exatamente a altura da tela do usuario*/
+           
+
+}
+
+.main > ul li:hover>ul.sidebar{
+    left: 0;/* .main > ul = seleciona um ul que pertence a classe main > li:hover = que  é o filho
+            do ul
+            ul.sidebar = seleciona o ul com a classe sidebar
+            left 0 = posiciona o elemento no canto esquerdo, neste caso o sidebar fica oculto, quando
+            posiciona o mouse ele aparece da esquerda para direita*/
+}
+
+.main > ul > li > ul.sidebar{
+    display: block;
+    left: -60vw;
+    width: 60vw;
+    position: fixed;
+    background-color: #bfa5ed;
+    padding: 12px;
+    transition: left 1s;
+}
