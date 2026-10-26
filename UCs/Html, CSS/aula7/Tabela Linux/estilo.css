@@ -1,0 +1,46 @@
+@charset "UTF-8";
+body{
+    background: url("imagens-tabela\ html/fundo2.png");
+}
+
+table#tabela{
+    width: 100%;
+    height: 1%;
+    border: 2px solid gold;
+    border-spacing: 0px;/* Retirando os espaços entre as bordas */
+    font-family: Comic Sans MS;
+    text-align: center;
+    vertical-align: center;
+}
+
+td{
+    border: 2px solid gold;
+    padding: 5px; /* mais espaço entre as celulas*/
+}
+
+tr.yellow{
+    background-color: yellow;
+    font-family: Comic Sans MS;
+    font-weight: bold;
+    width: 292px;
+}
+
+td.ouro{
+    background-color: #FFA500;
+    font-family: Comic Sans MS;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+h1{
+    text-align: center;
+    font-family: Comic Sans MS;
+    color: #FFFFFF;
+}
+
+tr.yellow a:hover{
+    /* hover é usado para aplicar um estilo diferente quando passar o mouse sobre
+    o elemento*/
+    color: red;
+    text-decoration: underline;
+}
