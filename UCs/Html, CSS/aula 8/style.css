@@ -1,0 +1,118 @@
+body{
+    font-family: Arial, Sans-serif;
+    margin: 0;
+    background: #f5f5f5;
+    color: #333;
+    }
+header{
+    background: white;
+    color: #004080;
+    display: space-between;
+}    
+
+img{
+    width: 60px;
+    height: 40px;
+    padding: 0%;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav a{
+    color:#004080;
+    text-decoration: none;
+}
+
+section{
+    padding: 20px;
+    background: white;
+    margin: 10px;
+    border-radius: 8px;
+
+}
+
+button{
+    background: #004080;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+#calendar{
+    padding: 10px;
+    background: #eef;
+    border-radius: 8px;
+}
+
+.evento{
+    margin:8px 0;
+    padding: 8px;
+    background: #fff;
+    border-left: 4px solid #004080;
+}
+
+.cal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.cal-grid{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.cal-dia{
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.cal-dia.semana{
+    font-weight: bold;
+    background: #004080;
+    color: white;
+}
+
+.cal-dia.evento{
+    background: #ffeb3b;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cal-dia.vazio{
+    background: transparent;
+    border: none;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top:0;
+    width: 100%; height: 100;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content{
+    background: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+}
+
+.close{
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
