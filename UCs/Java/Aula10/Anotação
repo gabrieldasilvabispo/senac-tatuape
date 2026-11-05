@@ -1,0 +1,676 @@
+## Eventos de Interface, Integração com o SO, Formulário de Fornecedores e Padrão Model (Projeto BL-PDV)
+ 
+### Ideia principal
+ 
+Nesta aula a interface do **BL-PDV** ganhou **interatividade** e a arquitetura ganhou uma nova camada:
+ 
+| Frente | O que foi feito |
+|---|---|
+| **Eventos na janela Sobre** | O botão **OK** fecha a janela com `dispose()` e o rótulo do GitHub vira um **hiperlink real** que abre o navegador padrão |
+| **Integração Main ↔ Sobre** | O botão "Sobre" do menu lateral da `Main` agora instancia e exibe a janela `Sobre` |
+| **Módulo de cadastros** | Criação do `JDialog` **`FrmFornecedor`** com `JTextField` e `JLabel` |
+| **Padrão Model** | Novo pacote `model` e classe **JavaBean** `Fornecedor`, que espelha em memória a tabela `fornecedores` do MySQL |
+ 
+---
+ 
+### Programação Orientada a Eventos
+ 
+Em interfaces gráficas o código **não roda sequencialmente** do início ao fim. O sistema entra em estado de espera (*Event Loop*) aguardando uma ação do usuário: clique, digitação, movimento da janela.
+ 
+Quando o usuário interage com um componente, um **Evento** é disparado. Para responder, registra-se um **Listener** (ouvidor) no componente, que executa um bloco de código específico.
+ 
+| Listener | Uso principal |
+|---|---|
+| `ActionListener` | Cliques em botões (`JButton`) |
+| `MouseListener` / `MouseAdapter` | Interações do mouse (clique, passagem do ponteiro, clique duplo) em componentes que não são botões, como um `JLabel` |
+ 
+---
+ 
+### Integração com a Área de Trabalho — `java.awt.Desktop`
+ 
+A classe `Desktop` permite que a aplicação interaja com os aplicativos nativos do sistema operacional: navegador padrão, leitor de e-mail ou gerenciador de arquivos.
+ 
+> 💡 **Analogia da Secretária:** a aplicação Java é um executivo em uma reunião. Quando precisa abrir uma página web, ele não constrói um navegador na própria sala; pede à secretária (`Desktop.getDesktop()`) que abra o navegador já instalado e navegue até o endereço (`browse(uri)`).
+ 
+---
+ 
+### A camada Model no padrão MVC
+ 
+O pacote `model` representa a **camada de dados**. A classe `Fornecedor` é um **JavaBean** (ou **DTO** — *Data Transfer Object*): não tem inteligência visual nem código de banco; é apenas um "container" (atributos privados com *getters* e *setters*) que transporta as informações entre a **view** e o **banco de dados**.
+ 
+```
++------------------------------------+        +------------------------------------+
+|            CAMADA VIEW             |        |            CAMADA MODEL            |
+|       (FrmFornecedor.java)         |        |          (Fornecedor.java)         |
+|                                    |        |                                    |
+| [TextID]    -> "1"                 |        | private int idFornecedor = 1;      |
+| [TextNome]  -> "Empresa X"         | -----> | private String nome = "Empresa X"; |
+| [TextFone]  -> "11 9999-9999"      |        | private String fone = "...";       |
+|                                    |        | (Getters & Setters)                |
++------------------------------------+        +------------------------------------+
+```
+ 
+---
+ 
+### Conceitos fundamentais
+ 
+| Conceito | O que faz |
+|---|---|
+| `dispose()` | Libera os recursos gráficos e fecha **apenas a janela atual**. Diferente de `System.exit(0)`, que encerra o programa inteiro |
+| `setLocationRelativeTo(null)` | No construtor de um `JFrame`/`JDialog`, centraliza a janela no monitor |
+| `java.net.URI` | *Uniform Resource Identifier*: representa e valida a sintaxe do endereço web (ex.: `"https://github.com/lbruss"`) |
+| `Desktop.getDesktop().browse(uri)` | Abre o navegador padrão do SO e carrega a URI informada |
+| `setEnabled(false)` | Desabilita o componente. No `FrmFornecedor`, aplicado a `textID` e `lblID`, pois a chave primária (`idFornecedor`) é gerada pelo banco via `AUTO_INCREMENT` |
+ 
+---
+ 
+### Código — Exemplo 1: janela de diálogo interativa (`Sobre.java`)
+ 
+```java
+package view;
+
+import java.awt.Desktop;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
+/**
+ * Janela de diálogo 'Sobre' com interatividade de links e modo escuro.
+ * 
+ * @author Bruss Loza
+ */
+public class Sobre extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Execução de teste individual da janela Sobre.
+     */
+    public static void main(String[] args) {
+        // Ativa o visual escuro do FlatLaf para testes
+        FlatDarkLaf.setup();
+
+        try {
+            Sobre dialog = new Sobre();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Construtor da janela Sobre.
+     */
+    public Sobre() {
+        setTitle("Sobre");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/img/sobre.png")));
+        setBounds(100, 100, 270, 370);
+        getContentPane().setLayout(null);
+
+        // Rótulos do Cabeçalho
+        JLabel lblBLPDV = new JLabel("BL-PDV");
+        lblBLPDV.setHorizontalAlignment(SwingConstants.CENTER);
+        lblBLPDV.setFont(new Font("Arial", Font.BOLD, 15));
+        lblBLPDV.setBounds(74, 11, 90, 24);
+        getContentPane().add(lblBLPDV);
+
+        JLabel lblDescricao = new JLabel("Sistema para gestão de estoque e PDV");
+        lblDescricao.setFont(new Font("Arial", Font.BOLD, 12));
+        lblDescricao.setBounds(10, 46, 235, 14);
+        getContentPane().add(lblDescricao);
+
+        JLabel lblAutor = new JLabel("Autor: Bruss Loza");
+        lblAutor.setFont(new Font("Arial", Font.BOLD, 12));
+        lblAutor.setBounds(10, 71, 150, 14);
+        getContentPane().add(lblAutor);
+
+        JLabel lblVersao = new JLabel("Versão 1.0");
+        lblVersao.setFont(new Font("Arial", Font.BOLD, 14));
+        lblVersao.setBounds(10, 96, 100, 14);
+        getContentPane().add(lblVersao);
+
+        // Ícones de Licença e Repositório
+        JLabel lblMit = new JLabel("");
+        lblMit.setIcon(new ImageIcon(Sobre.class.getResource("/img/mit.png")));
+        lblMit.setBounds(10, 174, 32, 39);
+        getContentPane().add(lblMit);
+
+        JLabel lblGithub = new JLabel("");
+        lblGithub.setIcon(new ImageIcon(Sobre.class.getResource("/img/github.png")));
+        lblGithub.setBounds(10, 225, 32, 32);
+        getContentPane().add(lblGithub);
+
+        // Hiperlink do GitHub com Evento de Clique do Mouse
+        JLabel lblRepositorio = new JLabel("github.com/lbruss");
+        lblRepositorio.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblRepositorio.setBounds(50, 233, 150, 17);
+        
+        // Registra o evento de clique no rótulo
+        lblRepositorio.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                link("https://github.com/lbruss");
+            }
+        });
+        getContentPane().add(lblRepositorio);
+
+        // Botão OK com Evento de Fechamento da Tela
+        JButton btnOK = new JButton("OK");
+        btnOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Descarta e fecha apenas a janela atual (Sobre)
+                dispose();
+            }
+        });
+        btnOK.setBounds(85, 285, 89, 23);
+        getContentPane().add(btnOK);
+
+        // Centraliza a janela no centro da tela ao abrir
+        setLocationRelativeTo(null);
+    }
+
+    /**
+     * Método utilitário para abrir URLs externas no navegador padrão do SO.
+     * 
+     * @param url Endereço web completo (ex: https://github.com/...)
+     */
+    private void link(String url) {
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            URI uri = new URI(url);
+            desktop.browse(uri); // Abre a URI no navegador nativo
+        } catch (Exception e) {
+            System.err.println("Erro ao abrir o navegador: " + e.getMessage());
+        }
+    }
+}
+```
+ 
+---
+ 
+### Código — Exemplo 2: tela principal com evento (`Main.java`)
+ 
+```java
+package view;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import com.formdev.flatlaf.FlatLightLaf;
+import database.Database;
+
+/**
+ * Janela Principal conectada às janelas secundárias através de eventos.
+ */
+public class Main extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JLabel lblData;
+    private JButton btnSobre; // Promovido a atributo para gerenciar propriedades
+
+    Database db = new Database();
+
+    public static void main(String[] args) {
+        FlatLightLaf.setup();
+
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Main frame = new Main();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public Main() {
+        setTitle("BL-PDV");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/img/blpvd.png")));
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 800, 600);
+
+        contentPane = new JPanel();
+        contentPane.setForeground(Color.RED);
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        // Painel Lateral
+        JPanel panelLateral = new JPanel();
+        panelLateral.setBorder(null);
+        panelLateral.setBackground(new Color(72, 61, 139));
+        panelLateral.setBounds(0, 0, 196, 538);
+        contentPane.add(panelLateral);
+        panelLateral.setLayout(null);
+
+        JLabel lblLogo = new JLabel("");
+        lblLogo.setIcon(new ImageIcon(Main.class.getResource("/img/blpvd.png")));
+        lblLogo.setBounds(10, 11, 64, 54);
+        panelLateral.add(lblLogo);
+
+        JLabel lblBLPDV = new JLabel("BL-PDV");
+        lblBLPDV.setForeground(new Color(240, 248, 255));
+        lblBLPDV.setFont(new Font("Arial", Font.BOLD, 25));
+        lblBLPDV.setBounds(85, 23, 101, 30);
+        panelLateral.add(lblBLPDV);
+
+        JLabel lblSistema = new JLabel("Sistema de PDV");
+        lblSistema.setForeground(new Color(255, 255, 255));
+        lblSistema.setBounds(84, 45, 100, 30);
+        panelLateral.add(lblSistema);
+
+        JButton btnFornecedores = new JButton("Fornecedores");
+        btnFornecedores.setBorderPainted(false);
+        btnFornecedores.setForeground(Color.BLACK);
+        btnFornecedores.setBackground(new Color(123, 104, 238));
+        btnFornecedores.setFont(new Font("Arial", Font.BOLD, 15));
+        btnFornecedores.setIcon(new ImageIcon(Main.class.getResource("/img/fornecedor.png")));
+        btnFornecedores.setBounds(10, 102, 176, 41);
+        panelLateral.add(btnFornecedores);
+
+        JLabel lblDivisor = new JLabel("-------------------------------------");
+        lblDivisor.setForeground(Color.WHITE);
+        lblDivisor.setBounds(18, 457, 168, 23);
+        panelLateral.add(lblDivisor);
+
+        // Botão Sobre com evento configurado
+        btnSobre = new JButton("Sobre");
+        btnSobre.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Instancia e abre a janela de diálogo Sobre
+                Sobre sobre = new Sobre();
+                sobre.setVisible(true);
+            }
+        });
+        btnSobre.setBackground(new Color(106, 90, 205));
+        btnSobre.setFont(new Font("Arial", Font.BOLD, 13));
+        btnSobre.setBorderPainted(false);
+        btnSobre.setHorizontalAlignment(SwingConstants.LEADING);
+        btnSobre.setIcon(new ImageIcon(Main.class.getResource("/img/sobre.png")));
+        btnSobre.setBounds(10, 479, 176, 48);
+        panelLateral.add(btnSobre);
+
+        // Rodapé de Status do Banco
+        JLabel lblDataBase = new JLabel("");
+        lblDataBase.setIcon(new ImageIcon(Main.class.getResource("/img/banco.png")));
+        lblDataBase.setBounds(206, 534, 20, 27);
+        contentPane.add(lblDataBase);
+
+        JLabel lblMysql = new JLabel("");
+        lblMysql.setBounds(231, 534, 130, 27);
+        contentPane.add(lblMysql);
+
+        JLabel lblStatus = new JLabel("•");
+        lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
+        lblStatus.setForeground(Color.RED);
+        lblStatus.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblStatus.setBounds(365, 534, 20, 27);
+        contentPane.add(lblStatus);
+
+        // Cabeçalho de Data
+        JLabel lblCalendario = new JLabel("");
+        lblCalendario.setIcon(new ImageIcon(Main.class.getResource("/img/calendario.png")));
+        lblCalendario.setBounds(682, 0, 24, 36);
+        contentPane.add(lblCalendario);
+
+        lblData = new JLabel("");
+        lblData.setBounds(710, 0, 70, 36);
+        contentPane.add(lblData);
+
+        if (db.testarConexao()) {
+            lblMysql.setText("MySQL Conectado");
+            lblStatus.setForeground(Color.GREEN);
+        } else {
+            lblMysql.setText("MySQL Desconectado");
+            lblStatus.setForeground(Color.RED);
+        }
+
+        atualizarData();
+    }
+
+    private void atualizarData() {
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String data = LocalDate.now().format(formatoData);
+        lblData.setText(data);
+    }
+}
+```
+ 
+---
+ 
+### Código — Exemplo 3: formulário de fornecedores (`FrmFornecedor.java`)
+ 
+```java
+package view;
+
+import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
+/**
+ * Interface gráfica (Formulário) para o Cadastro de Fornecedores.
+ */
+public class FrmFornecedor extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    
+    // Componentes de entrada de texto declarados como atributos
+    private JTextField textID;
+    private JTextField textNome;
+    private JTextField textFone;
+    private JTextField textEmail;
+    private JTextField textSite;
+
+    public static void main(String[] args) {
+        FlatDarkLaf.setup();
+
+        try {
+            FrmFornecedor dialog = new FrmFornecedor();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public FrmFornecedor() {
+        setResizable(false);
+        setTitle("Fornecedores");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(FrmFornecedor.class.getResource("/img/fornecedor.png")));
+        setBounds(100, 100, 680, 480);
+        getContentPane().setLayout(null);
+        setLocationRelativeTo(null); // Centraliza na tela
+
+        // Campo ID (Desabilitado)
+        JLabel lblID = new JLabel("ID");
+        lblID.setEnabled(false);
+        lblID.setFont(new Font("Arial", Font.BOLD, 14));
+        lblID.setBounds(10, 11, 30, 17);
+        getContentPane().add(lblID);
+
+        textID = new JTextField();
+        textID.setEnabled(false); // Impede edição direta do operador
+        textID.setBounds(57, 10, 96, 20);
+        getContentPane().add(textID);
+        textID.setColumns(10);
+
+        // Campo Nome
+        JLabel lblNome = new JLabel("Nome");
+        lblNome.setFont(new Font("Arial", Font.BOLD, 14));
+        lblNome.setBounds(10, 44, 48, 17);
+        getContentPane().add(lblNome);
+
+        textNome = new JTextField();
+        textNome.setColumns(10);
+        textNome.setBounds(57, 43, 281, 20);
+        getContentPane().add(textNome);
+
+        // Campo Fone
+        JLabel lblFone = new JLabel("Fone");
+        lblFone.setFont(new Font("Arial", Font.BOLD, 14));
+        lblFone.setBounds(10, 72, 48, 17);
+        getContentPane().add(lblFone);
+
+        textFone = new JTextField();
+        textFone.setColumns(10);
+        textFone.setBounds(57, 71, 150, 20);
+        getContentPane().add(textFone);
+
+        // Campo Email
+        JLabel lblEmail = new JLabel("Email");
+        lblEmail.setFont(new Font("Arial", Font.BOLD, 14));
+        lblEmail.setBounds(10, 103, 48, 17);
+        getContentPane().add(lblEmail);
+
+        textEmail = new JTextField();
+        textEmail.setColumns(10);
+        textEmail.setBounds(57, 102, 281, 20);
+        getContentPane().add(textEmail);
+
+        // Campo Site
+        JLabel lblSite = new JLabel("Site");
+        lblSite.setFont(new Font("Arial", Font.BOLD, 14));
+        lblSite.setBounds(10, 138, 32, 17);
+        getContentPane().add(lblSite);
+
+        textSite = new JTextField();
+        textSite.setColumns(10);
+        textSite.setBounds(57, 137, 281, 20);
+        getContentPane().add(textSite);
+    }
+}
+```
+ 
+---
+ 
+### Código — Exemplo 4: classe de modelo (`Fornecedor.java`)
+ 
+```java
+package model;
+
+/**
+ * JavaBean que representa o Modelo de Dados da tabela 'fornecedores'.
+ * 
+ * @author Bruss Loza
+ */
+public class Fornecedor {
+
+    // Atributos privados correspondentes às colunas da tabela MySQL
+    private int idFornecedor;
+    private String nome;
+    private String fone;
+    private String email;
+    private String site;
+
+    // --- GETTERS E SETTERS ---
+
+    public int getIdFornecedor() {
+        return idFornecedor;
+    }
+
+    public void setIdFornecedor(int idFornecedor) {
+        this.idFornecedor = idFornecedor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getFone() {
+        return fone;
+    }
+
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+}
+```
+ 
+---
+ 
+### Desmontando o código
+ 
+#### Abertura de link web — `link(String url)`
+ 
+```java
+private void link(String url) {
+    Desktop desktop = Desktop.getDesktop();
+    try {
+        URI uri = new URI(url);
+        desktop.browse(uri);
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+}
+```
+ 
+| Linha | Função |
+|---|---|
+| `Desktop desktop = Desktop.getDesktop();` | Obtém a instância compartilhada da área de trabalho do SO atual |
+| `URI uri = new URI(url);` | Valida a `String` e constrói um objeto `URI` |
+| `desktop.browse(uri);` | Pede ao SO que inicie a aplicação associada ao protocolo `https://` (o navegador padrão) |
+| `try-catch` | **Obrigatório**: a conversão pode lançar `URISyntaxException` ou o SO pode não suportar a ação (`IOException`) |
+ 
+#### Fechamento da janela com `dispose()`
+ 
+```java
+btnOK.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        dispose();
+    }
+});
+```
+ 
+| Trecho | Função |
+|---|---|
+| `btnOK.addActionListener(...)` | Anexa um *listener* de clique ao botão OK |
+| `actionPerformed(ActionEvent e)` | Executado automaticamente no instante do clique |
+| `dispose();` | Destrói a janela `Sobre` e libera a memória, deixando a `Main` aberta |
+ 
+---
+ 
+### Passo a passo — evento de mouse no rótulo do GitHub (WindowBuilder)
+ 
+1. Na aba **Design** de `Sobre.java`, selecione o rótulo `lblRepositorio`.
+2. Botão direito ➔ **Add event handler** ➔ **mouse** ➔ **mouseClicked**.
+3. O Eclipse cria o método `mouseClicked(MouseEvent e)` no código-fonte.
+4. Dentro dele, insira: `link("https://github.com/lbruss");`.
+ 
+### Passo a passo — criando o formulário `FrmFornecedor`
+ 
+1. Botão direito no pacote `view` ➔ **New** ➔ **Other...** ➔ **WindowBuilder** ➔ **Swing Designer** ➔ **JDialog**.
+2. Nomeie como `FrmFornecedor` (PascalCase).
+3. Na aba **Design**:
+   - dimensões da janela **680 x 480**;
+   - `resizable = false` e ícone `fornecedor.png`;
+   - layout do `getContentPane()` como **absolute**.
+4. Adicione `lblID` e `textID`; selecione ambos e marque `enabled = false`.
+5. Adicione os pares `JLabel` + `JTextField` para **Nome**, **Fone**, **Email** e **Site**.
+ 
+### Passo a passo — criando a camada Model
+ 
+1. No **Package Explorer**, botão direito em `src` ➔ **New** ➔ **Package**; nomeie como `model`.
+2. Botão direito no pacote `model` ➔ **New** ➔ **Class**; nomeie como `Fornecedor`.
+3. Declare os atributos privados com os mesmos nomes das colunas do MySQL (`idFornecedor`, `nome`, `fone`, `email`, `site`).
+4. Gere os *getters* e *setters*: botão direito no editor ➔ **Source** ➔ **Generate Getters and Setters**.
+ 
+---
+ 
+### Tabelas comparativas
+ 
+#### `ActionListener` vs. `MouseAdapter`
+ 
+| Recurso | `ActionListener` | `MouseAdapter` / `MouseListener` |
+|---|---|---|
+| Foco de uso | Botões (`JButton`), menus (`JMenuItem`) | Componentes genéricos (`JLabel`, `JPanel`, imagens) |
+| Evento principal | Clique de ação padrão (`actionPerformed`) | Vários eventos de mouse (`mouseClicked`, `mouseEntered`, `mouseExited`) |
+| Uso comum no PDV | Ações de botões como "Salvar" ou "OK" | Transformar textos e imagens em links clicáveis |
+ 
+#### Ações de encerramento de janela
+ 
+| Comando | O que faz | Aplicação ideal |
+|---|---|---|
+| `dispose()` | Destrói apenas a janela atual, mantendo as demais abertas | Janelas secundárias (`JDialog`) como "Sobre" e "Cadastro" |
+| `setVisible(false)` | Apenas oculta a janela, mas mantém o objeto na memória RAM | Janelas reaproveitadas rapidamente sem recalcular componentes |
+| `System.exit(0)` | Encerra a JVM e mata a aplicação inteira | Botão de Sair da tela principal (`JFrame`) |
+ 
+---
+ 
+### Arquitetura MVC do projeto
+ 
+Com o pacote `model`, o sistema passa a ser estruturado em camadas:
+ 
+| Camada | Pacote / Classes | Responsabilidade |
+|---|---|---|
+| **View** | `Main`, `Sobre`, `FrmFornecedor` | Interface visual e interação com o usuário |
+| **Model** | `Fornecedor` | Representação dos dados na memória |
+| **Persistência (DAO)** | `Database` | Conversar diretamente com o servidor MySQL |
+ 
+Essa separação impede que o código de banco fique misturado com os botões da tela, facilitando mudanças futuras sem quebrar a interface.
+ 
+---
+ 
+### Erros Comuns
+ 
+| Erro | Causa / Correção |
+|---|---|
+| `public class frmFornecedor` | Classes Java começam com **letra maiúscula** (PascalCase). Correto: `public class FrmFornecedor extends JDialog` |
+| Usar `Desktop.getDesktop().browse()` sem `try-catch` | Erro de compilação: `browse()` dispara exceções checadas (`IOException` e `URISyntaxException`) |
+ 
+---
+ 
+### Referência rápida — eventos, Desktop e Model
+ 
+| Tarefa | Código |
+|---|---|
+| Abrir URL no navegador | `Desktop.getDesktop().browse(new URI("https://github.com/lbruss"));` |
+| Fechar janela secundária | `dispose();` |
+| Centralizar janela na tela | `setLocationRelativeTo(null);` |
+| Evento de botão | `btn.addActionListener(...)` com `actionPerformed()` |
+| Evento de clique em rótulo | `lbl.addMouseListener(new MouseAdapter() { ... mouseClicked ... })` |
+| Desabilitar campo de chave primária | `textID.setEnabled(false);` |
+ 
+**Resumo relâmpago**
+ 
+- `dispose()` fecha a janela atual sem encerrar o programa.
+- Botões usam `ActionListener`; textos e imagens usam `MouseAdapter`.
+- `java.awt.Desktop` abre o navegador nativo a partir de uma `URI`.
+- O botão "Sobre" da `Main` instancia e exibe a janela `Sobre`.
+- `FrmFornecedor` (`JDialog`) recebe os dados cadastrais de fornecedores.
+- `textID` fica desabilitado por ser `AUTO_INCREMENT`.
+- O pacote `model` guarda JavaBeans que mapeiam as tabelas do banco.
+ 
+---
