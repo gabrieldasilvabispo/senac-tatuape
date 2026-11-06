@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Store - Moda Infantil</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho Principal com navegação -->
+     <header>
+        <div class="header-container">
+            <h1>Style Store</h1>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="feminina.html">Feminina</a>
+                <a href="masculina.html">Masculina</a>
+                <a href="infantil.html">Infantil</a>
+                <a href="cliente.html">Àrea do cliente</a>
+                <a href="vendedor.html">Àrea do Vendedor</a>
+
+            </nav>
+        </div>
+     </header>
+
+     <main class="container">
+        <h2 class="titulo-secao">Coleção Moda Infantil</h2>
+        <div id="grid-infantil" class="grid-produtos"></div>
+     </main>
+
+     <div class="carrinho-flutuante" onclick="abrirModalCarrinho()">
+         🛒 Carrinho <span id="carrinho-qtd">0</span>  
+         </div>
+
+         <!-- Modal do Carrinho de Compras -->
+          <div id="modal-carrinho" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Seu Carrinho de Compras</h2>
+                    <span class="fechar" onclick="fecharModalCarrinho()">&times;</span>
+                </div>
+                <div id="carrinho-itens" class="carrinho-corpo"></div>
+                <div class="carrinho-rodape">
+                    <h3>Total: R$ <span id="carrinho-total">0.00</span></h3>
+                    <button class="btn-primary" onclick="finalizarCompra()">Finalizar Compra</button>
+                </div>
+            </div>
+          </div>
+
+          <footer>
+            <p>&copy; 2026 StyleStore - Moda Infantil</p>
+           </footer>
+
+           <!-- Script JavaScript Principal -->
+            <script src="js/main.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                  renderizarDestaques();
+                });
+            </script>
+
+
+</body>
+</html>

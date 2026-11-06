@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleStore - Àrea do Vendedor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho Principal com navegação -->
+     <header>
+        <div class="header-container">
+            <h1>Style Store - Painel Gerencial</h1>
+            <nav>
+                <a href="index.html">Sair do Painel</a>
+            </nav>
+        </div>
+     </header>
+
+     <main class="container">
+        <!-- Tela de Login do Vendedor -->
+         <div id="box-login-vendedor" class="card-form">
+            <h2>Login do Vendedor</h2>
+            <form onsubmit="realizarLoginVendedor(event)">
+                <div class="form-group">
+                    <label>Usuário / E-mail:</label>
+                    <input type="text" id="vendedor-user" required placeholder="vendedor@loja.com">
+                </div>
+                <div class="form-group">
+                    <label>Senha:</label>
+                    <input type="password" id="vendedor-pass" required placeholder="123456">
+                </div>
+                <button type="submit" class="btn-primary btn-block">Acessar Painel</button>
+            </form>
+         </div>
+
+
+         <!-- Dasboard Administrativo (Exibido apos login)-->
+          <div id="painel-vendedor" class="painel-escondido">
+            <div class="copo-painel">
+                <h2>Painel de Controle de Vendas</h2>
+                <button class="btn-segundario" onclick="realizarLogoutVendedor()">Sair</button>
+            </div>
+
+         <!-- Botões de Exportação de Relatorios -->
+          <section class="card-relatorio">
+            <h3>Gerar Relatorios de Vendas</h3>
+            <p>Selecione o formato desejado para exportação instatãnea:</p>
+            <div class="acoes-relatorio">
+                <button class="btn-relatorio btn-csv" onclick="exportaCSV()">Exportar CSV</button>
+                <button class="btn-relatorio btn-excel" onclick="exportaExcel()">Exportar Excel</button>
+                <button class="btn-relatorio btn-pdf" onclick="exportaPDF()">Exportar PDF</button>
+            </div>
+          </section>
+
+          <!-- Tabela Geral de Vendas para impressão e Visualização -->
+           <section id="area-relatorio-impressao">
+            <div class="cabecalho-relatorio-pdf">
+            <h2>Style Store - Relatorio Oficial de Vendas'</h2>
+            <p>Emissão: <span id="data-relatorio"></span></p>
+            </div>
+
+            <h3>Histórico de Pedidos Registrados</h3>
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID pedido</th>
+                            <th>Cliente</th>
+                            <th>E-mail</th>
+                            <th>Data</th>
+                            <th>Total (R$)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-vendas-vendedor"></tbody>
+                </table>
+            </div>
+           </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Style Store - Módulo Administrativo</p>
+        </footer>
+
+        <script src="js/main.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoader',() =>{
+                verificarSessaoVendedor();
+            });
+        </script>
+</body>
