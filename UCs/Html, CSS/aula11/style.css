@@ -1,0 +1,339 @@
+/* Configurações gerais e variaveis */
+/* Definição de Cores para serem reutilizadas */
+/* :root => O root, representa o elemento raiz da pagina HTML <html>*/
+/* Ficando disponivel para a toda a pagina HTML */
+
+:root {
+    --prymary-color: #1a1a2e;
+    --accent-color: #e63946;
+    --bg-color: #f8f9fa;
+    --card-bg:#ffffff;
+    --text-color:#2b2d42;
+    --border-color:#e0e0e0;
+    --success-color:#2a9d8f; 
+}
+
+/* Estilos basicos para todos os elementos da pagina */
+/* O asterico '*' é o seletor universal, ele seleciona todos os elementos da pagina */
+
+* {
+    box-sizing: border-box; /* Controla como o navegador calcula a largura e altura dos elementos*/
+    margin: 0; /* Remove as margens externas padrão */
+    padding: 0; /* Remove os espaçamentos internos padrão */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex; /* Transforma um elemento container flexivel, facilitando o alinhamento e distribuição dos elementos de um pagina*/
+    flex-direction: column; /* Organiza os elementos de cima para baixo, muito utilizado para formularios, menus ferticais, barras laterais etc. */
+    min-width: 100vh; /* Define a altura minima de um elemento HTML como 100% da altura da janela do navegador */
+    /* vh = viewport Height = altura da área visivel da tela do navegador */
+}
+
+/* Trabalhando a Classe .container */
+/* A Classe container é normalmente usada para centralizar e organizar o conteudo principal da pagina */
+.container{
+    max-width: 1200px;/* Define a largura maxima do elemento */
+    margin: 2rem auto; /* Define margens externas */
+    /* rem é uma unidade baseada no tamanho da fonte raiz, exemplo: 1rem = 16px entao 2rem = 32px */
+    padding: 0 1rem; /* Define espaço interno - 0px em cima e embaixo - 1rem = 16px nas laterais */
+    flex: 1; /* Ocupe todo o espaço disponivel */
+}
+
+/* Cabeçalho e Navegação */
+header{
+    background-color: var(--prymary-color);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.header-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Quebra de linha  quando não houver espaço suficiente */
+}
+
+header h1{
+    font-size: 1.8rem;
+    letter-spacing: 1px; /* Controla  o espaçamento entre os caracteres (letras) de um texto */
+}
+
+nav a{
+    color: #edf2f4;
+    text-decoration: none;
+    margin-left: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover, nav a.active{
+    color: var(--accent-color);
+}
+
+/* Banner Carrosseal */
+
+.carrossel-container{
+    position: relative;/* Referencia do alinhamento*/
+    width: 100%;/* Ocupar 100% da largura do elemento */
+    max-width: 1200px;/* Carrossel com limite maximo de 1200px*/
+    height: 380px;/* A altura do elemento*/
+    margin-bottom: 2.5rem;/* Adicionar um espaço abaixo do carrossel */
+    border-radius: 19px;/* Arredonda os cantos*/
+    overflow: hidden;/* Esconde qualquer conteudo que ultrapasse os limites do carrossel*/
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    background-color: #1a1a2e;
+}
+
+.carrossel-wrapper{
+    /* Esta Classe guarda todos os slides do carrossel*/
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);/* transform 0.6s = Animação dura 0.6s 
+    (animação suave, por ex = 0.2s muito rápida e 1.5s = lenta*/
+    /* cubic-bezier = controla a velocidade da animação  */
+}
+
+.carrossel-slide{/*Será criada javaScript*/
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carrossel-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;/*Controla como uma imagem ou video se ajusta ao espaço disponivel */
+                      /* Cover = faz com que a imagem ou video preencha todo o espaço sem deformar */
+    position: absolute; /*Permite posicionar o elemento exatamente onde desejo*/
+    top: 0; /* Posiciona o elemento ao topo*/
+    left: 0; /*Posiociona o elemento an borda esquerda*/   
+    z-index: 1; /* Controla qual elemento aparece na frente dos outros */               
+}
+
+.carrossel-overlay{
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0 , 0, 0.45);
+    backdrop-filter: blur(4px); /*Aplica o efeito de desfoque ao que esta atrás de uma elemento*/
+    padding: 2.2rem 3rem;
+    border-radius: 16px;
+    text-align: center;
+    color: white;
+    max-width: 720px;
+    margin: 0 1.5rem;/*Define espaçamento interno */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);/*Adiciona uma sombra ao redor de um elemento*/
+    /* 0 => sem deslocamento horizontal
+       8px => sombra deslocada 8px para baixo
+       32px => desfoque da sombra
+       rgba => preto com 35% de opacidade/trasnparência*/
+}
+
+.carrossel-overlay h2{
+    font-size: 2.3rem;
+    margin-bottom: 0.8rem;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.carrossel-overlay p{
+    font-size: 1.15rem;/* Se o padrão da fonte for 16px = 18.4px aumento de 15%*/
+    margin-bottom: 1.4rem;/* Adiciona um espaço abaixo do elemento 1.4 = 22.4px*/
+    opacity: 0.95; /* Coloca a transparência no elemento    
+                   0 = Totalmente invisivel
+                   0.5 = 50% visivel
+                   1 = Totalmente visivel*/
+line-height: 1.4;/* È a altura da linha neste caso 1.4 vezes o tamanho da fonte, se a fonte tiver 20px a altura da linha sera de 28px*/ 
+}
+
+.carrossel-overlay .btn-banner{
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.7rem 1.8rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;/* Define a espessura da fonte, ou muito fine ou muito grossa, 700 Negrito*/
+    font-size: 1rem;
+    transition: transform 0.3, backgroud-color 0.3s, box-shadow 0.3;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+}
+
+/*Definindo o estilo de um botão ao passar o mouse sobre ele*/
+.carrossel-overlay .btn-banner:hover{
+    background-color: #ff4d5a;
+    transform: translate(-2px);/* Move o botão - Valor positivo = sobe o botão, Valor negativo = desce o botão*/
+    box-shadow: 0 6px 16px rgba(230, 57, 70, 0.6);
+}
+
+/* Botões Laterais */
+.carrossel-btn{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50px);
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 1.4rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;/* Alinhar o item principal*/
+    transition: background 0.3s, transform 0.2s;
+}
+
+.carrossel-btn:hover{
+    background: var(--accent-color);
+    transform: translate(-50%) scale(1.1);
+}
+
+.btn-prev{left: 15px;}/* Botão no canto esquerdo*/
+.btn-next{right: 15px;}/* Botão no canto direito*/
+
+/* Indicador de bolinhas (Dots) */
+.carrossel-indicadores{
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transform: all 0.3s ease;
+    /* Cria uma animação suave, all = Aplicar a transição em todas as propiedades
+    0.3 = duranção de 0.3 segundos
+    ease = velocidade da animação (começa rápida e termina devagar */
+}
+
+.dot.active, .dot:hover{
+    background-color: var(--accent-color);
+    transform: scale(1.2);
+    width: 26px;
+    border-radius: 12px;
+}
+
+.titulo-secao{
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--accent-color);
+    padding-left: 0.8rem;
+}
+
+/* Vitrine de Produtos */
+.card-produto{
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0 , 0, 0.5);
+    transition: transform  0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-produto{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));/* O grid-template-columns => Define as colunas
+                                                                 repeat => repete automaticamente o padrão das colunas.
+                                                                 auto-fill => Cria o maior numeor possivel de colunas que caibam na tela.
+                                                                 minmax => largura minima da coluna de 250px e largura maxima 1 fração do espaço disponivel.
+                                                                 As  colunas são ajustadas automaticamente quando a tela aumenta ou diminui,
+                                                                 se diminuir, faz a quebra automatica da linha para ajustar as colunas */ 
+gap: 1.8rem;
+}
+
+.card-produto:hover{
+    transform: translate(-6px);
+    box-shadow: 0 12px 20px rgba(0, 0 , 0, 0.12);
+}
+
+.card-produto img{
+    width: 100;
+    height: 260px;
+    object-fit: cover;/* object-fit: Define como uma imagem deve se ajustar ao espaço disponivel
+                      cover: para a imagem preencher todo o espaço e manter a sua proporção original */
+    background-color: #f0f0f0;
+
+}
+
+.card-info{
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-info h3{
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-info .preco{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 0.8rem 0;
+}
+
+/* Botões e Componentes */
+.btn-primary{
+    background-color: var(--prymary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3;
+
+}
+
+.btn-primary:hover{
+    background-color: var(--accent-color);
+}
+
+.btn-secundario{
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-block{
+    width: 100%;/*btn-block é a classe, o width: 100% faz com que o elemento ocupe 100% da largura disponivel*/
+}
+
+/* Carrinho Flutuante */
+
+
+
+
+
+
+
