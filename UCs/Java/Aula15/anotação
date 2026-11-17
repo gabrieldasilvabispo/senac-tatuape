@@ -1,0 +1,73 @@
+nesta aula começamos a mexer em uma nova JDialog, frmProduto, primeiro adicionamos icons no btnAdicionarProduto e lblCaixa, depois adicionamos argumentos no JcomboBox(<String>) no import javax.swing.JComboBox; e adicionamos <> no cboFornecedor = new JComboBox(); para sair o amarelo. Depois colocamos o FlatLightLaf.setup(); para adicionar a biblioteca e depois centralizamos com o setLocationRelativeTo(null);. em seguida começamos a validar o campos:textDescricao.setDocument(new Validador(100));, textCategoria.setDocument(new Validador(50));, textPrecoCusto.setDocument(new Validador(10, "decimal"));, textPrecoVenda.setDocument(new Validador(10, "decimal"));, textQuantidade.setDocument(new Validador(10, "inteiro"));, textEstoqueMinimo.setDocument(new Validador(10, "inteiro"));. Em seguida no pacote model criamos a classe Produto e criamos os atributos depois geramos os getters e setters, com botão direito Generate source getters e setters. Depois criamos outra classe no pacote controller, ProdutoController, e importamos o Database com Database database = new Database();. Depois em frmProduto colocamos no inicio, FornecedorController controllerFornecedor =  new FornecedorController();, ProdutoController controllerProduto = new ProdutoController();, Fornecedor fornecedor = new Fornecedor();, Produto produto = new Produto();.
+
+
+
+Depois fizemos isso no final do frmFornecedor: //==================== Preencher o comboBox a lista de fornecedores//
+	private void carregarFornecedor() {
+		//limpar o comboBox
+		cboFornecedor.removeAllItems();
+		
+		//Opção padrão
+		cboFornecedor.addItem("Selecione");
+		
+		ArrayList<Fornecedor> Lista = controllerFornecedor.listarFornecedores();
+		
+		for (Fornecedor fornecedor: Lista) {
+			cboFornecedor.addItem(fornecedor.getIdFornecedor() + " - " + fornecedor.getNome());
+Também adicionamos FlatLightLaf.setup(); no public static void main(String[] args) para colocar a biblioteca e setLocationRelativeTo(null); no public frmProduto() para centralizar a janela.
+
+também adicionamos uma ação no fornecedor://ComboBox - fornecedor
+		cboFornecedor = new JComboBox<>();
+		//Evento do ComboBox  - seleciona um item da lista ( ID Fornecedor)
+		cboFornecedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String selecionado = (String) cboFornecedor.getSelectedItem();
+				
+				if(selecionado != null && !selecionado.equals("Selecionado")) {
+					
+					String id = selecionado.split(" - ")[0];
+					textIDFornecedor.setText(id);
+				
+				} else {
+					textIDFornecedor.setText("");
+				}
+					
+				}
+
+
+
+Agora em FornecedorController://==============
+	//Listar fornecedores -> Produtos
+	//==============
+	public ArrayList<Fornecedor> listarFornecedores(){
+		ArrayList<Fornecedor> lista = new ArrayList<>();
+		try {
+			String sql = """
+					select idFornecedor, nome
+					from fornecedores
+					order by nome
+					""";
+			Connection con = database.conectar();
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Fornecedor fornecedor = new Fornecedor();
+				
+				fornecedor.setIdFornecedor(rs.getInt("idFornecedor"));
+				fornecedor.setNome(rs.getString("Nome"));
+				
+				lista.add(fornecedor);
+				
+			}
+			
+			rs.close();
+			stmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return lista;
+		
+	  
