@@ -1,1 +1,226 @@
 
+nesta aula começamos terminando de validar os campos obrigadorios no frmProduto://Botão adicionar
+		btnAdicionarProduto = new JButton("");
+		//Evento do botão adicionar
+		btnAdicionarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Validações dos campos obrigatórios
+				if(textBarcode.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha o codigo de barras");
+					textBarcode.requestFocus();
+				
+				}else if(textDescricao.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha o nome do produto");
+					textDescricao.requestFocus();
+				
+				}else if (textCategoria.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha o nome do produto");
+					textCategoria.requestFocus();
+				
+				}else if (textPrecoVenda.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha o preço da venda");
+					textPrecoVenda.requestFocus();
+				
+				}else if (textQuantidade.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha a quantidade");
+					textQuantidade.requestFocus();
+				
+				}else if (textIDFornecedor.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha o nome do produto");
+					cboFornecedor.requestFocus();
+				
+				}else if (textPrecoCusto.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha o  preço de custo");
+					textPrecoCusto.requestFocus();
+				
+				}else if (textEstoqueMinimo.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Preencha o estoque minimo");
+					textEstoqueMinimo.requestFocus();
+				
+				}else {
+					produto.setCodigoBarras(textBarcode.getText());
+					
+					produto.setDescricao(textDescricao.getText());
+					
+					produto.setCategoria(textCategoria.getText());
+
+
+
+Depois fizemos isso://Atenção Converter a " , " por " . " .replace
+					produto.setPrecoCusto(Double.parseDouble(textPrecoCusto.getText().replace(",",".")));
+					
+					produto.setPrecoVenda(Double.parseDouble(textPrecoVenda.getText().replace(",",".")));
+					
+					produto.setQuantidade(Integer.parseInt(textQuantidade.getText()));
+					
+					produto.setEstoqueMinimo(Integer.parseInt(textEstoqueMinimo.getText()));
+					
+					produto.setIdFornecedor(Integer.parseInt(textIDFornecedor.getText()));
+
+em seguida adicionar mensagem:
+					
+					boolean sucesso = controllerProduto.adicionar(produto);
+					if (sucesso == true) {
+						JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso");
+						
+						limparCampos();
+					
+					}else {
+						JOptionPane.showMessageDialog(null, "Não foi possivel adicionar o produto.\nCodigo de barras duplicado");
+						textBarcode.setText(null);
+						textBarcode.requestFocus();
+
+
+depois fomos para o ProdutoController fazer o seguinte:
+	//===========
+	//Adicionar Produto - Cruid Create
+	//===========
+	public boolean adicionar(Produto produto) {
+		try {
+			String sql = """
+					insert into produtos(codigoBarras, descricao, categoria, 
+					precoCusto, precoVenda, quantidade, estoqueMinimo, idFornecedor
+					values(?,?,?,?,?,?,?,?)
+					""";
+			
+			Connection con = database.conectar();
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			//Verificar se o codigo de barras esta vazio
+			if(produto.getCodigoBarras().isBlank()) {
+				stmt.setNull(1, java.sql.Types.VARCHAR);
+			} else {
+				stmt.setString(1, produto.getCodigoBarras());
+			}
+			
+			stmt.setString(2, produto.getDescricao());
+			stmt.setString(3, produto.getCategoria());
+			stmt.setDouble(4, produto.getPrecoCusto());
+			stmt.setDouble(4, produto.getPrecoVenda());
+			stmt.setInt(6, produto.getQuantidade());
+			stmt.setInt(7, produto.getEstoqueMinimo());
+			stmt.setInt(8, produto.getIdFornecedor());
+			
+			stmt.executeUpdate();
+			
+			stmt.close();
+			con.close();
+			
+			return true;//Produto inserido com sucesso
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao adicionar o produto: " + e );
+			return false;
+		}
+	}//Fim do CRUD Create
+	
+}
+
+
+
+em seguida botão direito em textBarcode no desing para adicionar um evento ao pressionar o Enter = key = keypressed: 
+		textBarcode = new JTextField();
+		//===================================================
+		//Evento relacionado ao codigo de barras = CRUID Read
+		//===================================================
+		textBarcode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				//se a tecla ENTER for pressionada
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					//Captura o codigo de barras
+					String barcode = textBarcode.getText();
+					
+					Produto produto = controllerProduto.buscarCodigoBarras(barcode);
+					
+					//Se existir um produto cadastro
+					if(produto != null) {
+						textIdProduto.setText(String.valueOf(produto.getIdProduto()));
+						
+						textDescricao.setText(produto.getDescricao());
+						textCategoria.setText(produto.getCategoria());
+						textPrecoCusto.setText(String.valueOf(produto.getPrecoCusto()));
+						textPrecoVenda.setText(String.valueOf(produto.getPrecoVenda()));
+						textQuantidade.setText(String.valueOf(produto.getQuantidade()));
+						textEstoqueMinimo.setText(String.valueOf(produto.getEstoqueMinimo()));
+						textIDFornecedor.setText(String.valueOf(produto.getIdFornecedor()));
+						
+						//Localizar e selecionar o fornecedor a partir do id
+						
+						for(int i = 0; i < cboFornecedor.getItemCount(); i++) {
+			String item = cboFornecedor.getItemAt(i);
+			if(item.startsWith(produto.getIdFornecedor() + " - ")) {
+				cboFornecedor.setSelectedIndex(i);
+				
+				//Desabilitar o botão adicionar
+				btnAdicionarProduto.setEnabled(false);
+				
+				
+			}else {
+				int resposta = JOptionPane.showConfirmDialog(null, "Produto não cadastrado.\nDeseja cadastrar este produto?", "Aviso",JOptionPane.YES_NO_OPTION);
+				
+				if(resposta == JOptionPane.NO_OPTION) {
+					limparCampos();
+				}else {
+					textDescricao.requestFocus();
+				}
+			}
+			
+		}
+					}
+				}
+				
+			}
+		});
+		//Fim do evento Codigo de Barras
+
+depois em ProdutoController mandamos buscar://===========
+	//Buscar produto pelo codigo de barras - CRUID Read
+	//===========
+	public Produto buscarCodigoBarras(String codigoBarras) {
+		try {
+			
+			String sql = """
+					select idProduto, descricao, categoria, precoCusto, precoVenda, quantidade, EstoqueMinimo, IdFornecedor
+					from produtos
+					where codigoBarras = ?
+					""";
+			
+			Produto produto = null;
+			
+			Connection con = database.conectar();
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setString(1, codigoBarras);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			//Se existir um produto cadastrado
+			if (rs.next()) {
+				produto = new Produto();
+				produto.setIdProduto(rs.getInt("IdProduto"));
+				produto.setDescricao(rs.getString("descricao"));
+				produto.setCategoria(rs.getString("categoria"));
+				produto.setPrecoCusto(rs.getDouble("precoCusto"));
+				produto.setPrecoVenda(rs.getDouble("precoVenda"));
+				produto.setQuantidade(rs.getInt("quantidade"));
+				produto.setEstoqueMinimo(rs.getInt("estoqueMinimo"));
+				produto.setIdFornecedor(rs.getInt("idFornecedor"));
+			}
+			
+			rs.close();
+			stmt.close();
+			con.close();
+			
+			return produto;
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao buscar o produto" + e);
+			return null;
+		}
+	}
+	
+}
+				
