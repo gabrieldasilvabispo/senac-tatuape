@@ -1,0 +1,380 @@
+Adicionando os botões Editar e Deletar
+No Eclipse, abra o formulário frmProduto na aba Design.
+
+Adicione dois componentes JButton:
+
+Propriedade	Botão Editar	Botão Deletar
+Variable	btnUpdate	btnDelete
+Text	Vazio	Vazio
+Icon	Ícone de editar	Ícone de deletar
+Os ícones serão utilizados para identificar visualmente a função de cada botão.
+
+No código da classe, o WindowBuilder cria as variáveis:
+
+private JButton btnUpdate;
+private JButton btnDelete;
+Por que utilizar ícones?
+
+Os ícones ajudam o usuário a identificar rapidamente as ações disponíveis. Isso deixa a interface mais intuitiva e reduz a quantidade de texto nos botões.
+
+Implementando a edição de produtos no formulário
+A edição permite modificar as informações de um produto que já está cadastrado no banco de dados.
+
+Para isso, precisamos recuperar o produto, alterar seus dados e enviar as novas informações ao banco.
+
+No botão btnUpdate, adicione um evento ActionListener.
+
+Validando os campos obrigatórios
+Antes de atualizar o produto, precisamos verificar se os campos necessários foram preenchidos.
+
+// VALIDAÇÕES DOS CAMPOS OBRIGATÓRIOS
+if(textBarcode.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha o código de barras");
+    textBarcode.requestFocus();
+
+}else if(textDescricao.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha o nome do produto");
+    textDescricao.requestFocus();
+
+}else if(textCategoria.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha a categoria");
+    textCategoria.requestFocus();
+
+}else if(textPrecoCusto.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha o preço de custo");
+    textPrecoCusto.requestFocus();
+
+}else if(textPrecoVenda.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha a venda");
+    textPrecoVenda.requestFocus();
+
+}else if(textQuantidade.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha a quantidade");
+    textQuantidade.requestFocus();
+
+}else if(textEstoqueMinimo.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha o estoque mínimo");
+    textEstoqueMinimo.requestFocus();
+
+}else if(textIDFornecedor.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha o fornecedor");
+    cboFornecedor.requestFocus();
+
+}else {
+    // Atualização do produto
+}
+Cada condição verifica um campo. Caso esteja vazio, o sistema exibe uma mensagem e direciona o cursor para o campo que precisa ser preenchido.
+
+
+
+Transferindo os dados para o objeto Produto
+Dentro do último else, precisamos atualizar os atributos do objeto produto com as informações digitadas no formulário.
+
+produto.setIdProduto(Integer.parseInt(textIDProduto.getText()));
+produto.setCodigoBarras(textBarcode.getText());
+produto.setDescricao(textDescricao.getText());
+produto.setCategoria(textCategoria.getText());
+
+// Converter vírgula para ponto antes de transformar em Double
+produto.setPrecoCusto(Double.parseDouble(
+    textPrecoCusto.getText().replace(",", ".")
+));
+
+produto.setPrecoVenda(Double.parseDouble(
+    textPrecoVenda.getText().replace(",", ".")
+));
+
+produto.setQuatidade(Integer.parseInt(textQuantidade.getText()));
+produto.setEstoqueMinimo(Integer.parseInt(textEstoqueMinimo.getText()));
+produto.setIdFornecedor(Integer.parseInt(textIDFornecedor.getText()));
+Entendendo os principais comandos:
+
+setIdProduto(): informa qual produto será atualizado. O ID é fundamental para localizar o registro correto no banco.
+setCodigoBarras(): atualiza o código de barras.
+setDescricao(): atualiza o nome ou descrição do produto.
+setCategoria(): atualiza a categoria.
+setPrecoCusto() e setPrecoVenda(): recebem os preços convertidos para double.
+setQuatidade(): atualiza a quantidade disponível.
+setEstoqueMinimo(): atualiza o limite mínimo de estoque.
+setIdFornecedor(): informa o fornecedor relacionado ao produto.
+Chamando o método de edição
+Depois de preencher o objeto, chamamos o método editar() do controlador:
+
+boolean sucesso = controllerProduto.editar(produto);
+
+if(sucesso == true) {
+    JOptionPane.showMessageDialog(null, "Produto editado com sucesso!");
+    limparCampos();
+
+}else {
+    JOptionPane.showMessageDialog(null,
+        "Não foi possível editar o produto.\nCódigo de barras duplicado");
+
+    textBarcode.requestFocus();
+}
+O método retorna um valor booleano:
+
+true: a operação foi executada sem lançar uma exceção.
+false: ocorreu algum erro durante a operação.
+Se a edição for bem-sucedida, o formulário será limpo. Caso contrário, o sistema exibirá uma mensagem de erro.
+
+Observação importante: a mensagem de erro menciona código de barras duplicado, mas nem todo erro de edição será causado por isso. Também pode ocorrer uma falha de conexão ou outro problema no banco de dados. Em uma versão mais completa, seria melhor identificar e apresentar cada erro separadamente.
+
+O else final é executado somente quando todas as validações são aprovadas.
+
+Implementando o método editar() no ProdutoController
+Agora precisamos criar o método responsável por atualizar os dados diretamente no MySQL.
+
+Abra ProdutoController.java e adicione o método:
+
+// ===============================
+// EDITAR PRODUTO - CRUD UPDATE
+// ===============================
+public boolean editar(Produto produto) {
+    try {
+        String sql = """
+            update produtos
+            set codigoBarras = ?, descricao = ?, categoria = ?,
+                precoCusto = ?, precoVenda = ?, quantidade = ?,
+                estoqueMinimo = ?, idFornecedor = ?
+            where idProduto = ?
+            """;
+
+        Connection con = database.conectar();
+        PreparedStatement stmt = con.prepareStatement(sql);
+
+        // Verificar se o código de barras está vazio
+        if(produto.getCodigoBarras().isBlank()) {
+            stmt.setNull(1, java.sql.Types.VARCHAR);
+        }else {
+            stmt.setString(1, produto.getCodigoBarras());
+        }
+
+        stmt.setString(2, produto.getDescricao());
+        stmt.setString(3, produto.getCategoria());
+        stmt.setDouble(4, produto.getPrecoCusto());
+        stmt.setDouble(5, produto.getPrecoVenda());
+        stmt.setInt(6, produto.getQuatidade());
+        stmt.setInt(7, produto.getEstoqueMinimo());
+        stmt.setInt(8, produto.getIdFornecedor());
+        stmt.setInt(9, produto.getIdProduto());
+
+        stmt.executeUpdate();
+
+        stmt.close();
+        con.close();
+
+        return true;
+
+    } catch (Exception e) {
+        System.out.println("Erro ao editar o produto: " + e);
+        return false;
+    }
+}
+
+
+Implementando a busca de produtos pela descrição
+Além da pesquisa pelo código de barras, vamos adicionar uma segunda maneira de localizar produtos: pela descrição.
+
+No frmProduto, abra a aba Design e adicione um JButton com as seguintes propriedades:
+
+Propriedade	Valor
+Variable	btnBuscar
+Text	Buscar
+Icon	Ícone de busca
+Depois, clique duas vezes no botão para criar seu evento.
+
+Validando a descrição
+Primeiro, verificamos se o campo de descrição foi preenchido:
+
+if(textDescricao.getText().isBlank()) {
+    JOptionPane.showMessageDialog(null, "Preencha o nome do produto");
+    textDescricao.requestFocus();
+
+}else {
+    // Realizar a busca
+}
+A busca só será executada quando o usuário informar uma descrição.
+
+Chamando o controlador
+Dentro do else, capturamos o texto digitado e chamamos o método buscarProduto():
+
+String descricao = textDescricao.getText();
+
+Produto produto = controllerProduto.buscarProduto(descricao);
+O método recebe a descrição e retorna um objeto Produto, caso encontre um registro correspondente.
+
+Preenchendo os campos automaticamente
+Se o produto existir, o sistema utiliza os métodos setText() para preencher os campos do formulário:
+
+if(produto != null) {
+
+    textIDProduto.setText(String.valueOf(produto.getIdProduto()));
+    textBarcode.setText(produto.getCodigoBarras());
+    textDescricao.setText(produto.getDescricao());
+    textCategoria.setText(produto.getCategoria());
+    textPrecoCusto.setText(String.valueOf(produto.getPrecoCusto()));
+    textPrecoVenda.setText(String.valueOf(produto.getPrecoVenda()));
+    textQuantidade.setText(String.valueOf(produto.getQuatidade()));
+    textEstoqueMinimo.setText(String.valueOf(produto.getEstoqueMinimo()));
+    textIDFornecedor.setText(String.valueOf(produto.getIdFornecedor()));
+
+    // Localizar e selecionar o fornecedor a partir do ID
+    for(int i = 0; i < cboFornecedor.getItemCount(); i++) {
+
+        String item = cboFornecedor.getItemAt(i);
+
+        if(item.startsWith(produto.getIdFornecedor() + " - ")) {
+            cboFornecedor.setSelectedIndex(i);
+        }
+    }
+
+    // Desabilitar o botão Adicionar e habilitar Editar/Deletar
+    btnAdicionarProduto.setEnabled(false);
+    btnUpdate.setEnabled(true);
+    btnDelete.setEnabled(true);
+
+}else {
+    JOptionPane.showMessageDialog(null, "Produto não cadastrado");
+    textDescricao.requestFocus();
+}
+Entendendo os comandos
+
+String.valueOf()
+
+Transforma um valor em texto.
+
+Por exemplo:
+
+int id = 10;
+
+textIDProduto.setText(String.valueOf(id));
+O método setText() recebe uma String. Por isso, quando o valor original é um número, utilizamos String.valueOf() para convertê-lo.
+
+produto != null
+
+Verifica se o controlador encontrou um produto.
+
+Se o resultado for diferente de null, significa que o objeto foi encontrado e pode ser utilizado.
+
+for
+
+Percorre os itens existentes no JComboBox:
+
+for(int i = 0; i < cboFornecedor.getItemCount(); i++)
+int i = 0: começa pelo primeiro item.
+i < cboFornecedor.getItemCount(): continua enquanto houver itens.
+i++: avança para o próximo item.
+startsWith()
+
+Verifica se um texto começa com determinado conteúdo:
+
+item.startsWith(produto.getIdFornecedor() + " - ")
+Como os fornecedores são apresentados no formato ID - Nome, esse comando permite localizar o fornecedor pelo ID.
+
+setSelectedIndex(i)
+
+Seleciona o fornecedor encontrado no JComboBox.
+
+Controle dos botões
+Depois de encontrar um produto, precisamos impedir que o usuário tente cadastrá-lo novamente e liberar as opções de edição e exclusão.
+
+btnAdicionarProduto.setEnabled(false);
+btnUpdate.setEnabled(true);
+btnDelete.setEnabled(true);
+O método setEnabled() controla se um componente pode ser utilizado:
+
+false: desabilita o botão.
+true: habilita o botão.
+
+Entendendo o ResultSet
+
+ResultSet rs = stmt.executeQuery();
+O ResultSet armazena o resultado de uma consulta SELECT.
+
+Para verificar se existe algum registro:
+
+if(rs.next()) {
+O método next() avança para a próxima linha do resultado.
+
+Se existir uma linha, retorna true.
+Se não existir, retorna false.
+Quando encontra um registro, criamos um novo objeto:
+
+produto = new Produto();
+Depois, transferimos os dados do banco para os atributos desse objeto.
+
+Por exemplo:
+
+produto.setDescricao(rs.getString("descricao"));
+Esse comando lê o valor da coluna descricao no banco e coloca essa informação no objeto produto.
+
+Ao final:
+
+return produto;
+Retornamos o objeto preenchido. Se nenhum produto for encontrado, o valor continua sendo null.
+
+Diferença entre buscar pelo código de barras e pela descrição
+
+O projeto agora possui dois métodos de consulta.
+
+Método	Campo utilizado na busca	Objetivo
+buscarCodigoBarras()	codigoBarras	Localizar pelo código de barras
+buscarProduto()	descricao	Localizar pela descrição
+Ambos utilizam SELECT, PreparedStatement e ResultSet.
+
+A principal diferença está na coluna utilizada na condição WHERE.
+
+Observação importante: a consulta apresentada utiliza descricao = ?, ou seja, exige uma descrição correspondente ao valor pesquisado. Ela não realiza uma busca parcial.
+
+Se quisermos encontrar produtos mesmo digitando apenas parte do nome, podemos utilizar:
+
+WHERE descricao LIKE ?
+E no Java:
+
+stmt.setString(1, "%" + descricao + "%");
+Por exemplo, uma pesquisa por café poderia encontrar Café em pó, Café solúvel e Café especial.
+
+
+
+Fluxo de funcionamento do cadastro de produtos
+Com as novas funcionalidades, o fluxo do formulário fica assim:
+
+O usuário informa o código de barras ou a descrição.
+O sistema consulta o banco de dados.
+Se encontrar o produto, preenche os campos automaticamente.
+O sistema desabilita o botão Adicionar.
+Os botões Editar e Deletar ficam disponíveis.
+Se o usuário editar, o método editar() atualiza o registro.
+Se o usuário excluir e confirmar, o método deletar() remove o registro.
+Depois de uma operação bem-sucedida, limparCampos() prepara o formulário para uma nova operação.
+
+
+Guia Rápido de Memorização
+Comando	Função
+UPDATE	Atualiza registros existentes
+SET	Define os novos valores das colunas
+WHERE	Determina qual registro será alterado ou excluído
+DELETE	Exclui registros
+SELECT	Consulta informações
+PreparedStatement	Prepara comandos SQL com parâmetros
+executeUpdate()	Executa INSERT, UPDATE e DELETE
+executeQuery()	Executa consultas SELECT
+ResultSet	Armazena os resultados de uma consulta
+rs.next()	Avança para a próxima linha do resultado
+setEnabled()	Habilita ou desabilita componentes
+String.valueOf()	Converte valores para texto
+startsWith()	Verifica o início de uma String
+setSelectedIndex()	Seleciona um item do JComboBox
+Resumo Relâmpago
+
+O CRUD é formado por Create, Read, Update e Delete.
+adicionar() cadastra novos produtos no banco de dados.
+buscarCodigoBarras() localiza produtos pelo código de barras.
+buscarProduto() localiza produtos pela descrição.
+editar() utiliza UPDATE para modificar informações existentes.
+deletar() utiliza DELETE para excluir um produto.
+O WHERE identifica qual registro será alterado ou excluído.
+O PreparedStatement envia os parâmetros para os comandos SQL.
+O ResultSet permite acessar os dados retornados pelo SELECT.
+O formulário utiliza os controladores para realizar as operações no banco de dados.
